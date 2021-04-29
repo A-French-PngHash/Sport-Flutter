@@ -1,16 +1,13 @@
-# sport
+# Sport
 
-A new Flutter project.
+A fitness application. 
 
-## Getting Started
+It is a remake of my [previous fitness app](https://github.com/PngHash-Titouan/Sport). This time it will be written in dart (with flutter) to allow for cross platform usage.
 
-This project is a starting point for a Flutter application.
+## Goals
 
-A few resources to get you started if this is your first Flutter project:
+There is a few different goals around the creation of this app :
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    - Enable the use of the fitness app on android (which wasn't possible with the previous one).
+    - Redesign the app for ease of use.
+    - Optimize app by using new techniques.
