@@ -1,0 +1,12 @@
+{
+    "0" : {
+        "name" : "Bear Crawl",
+        "imagesCount" : 2,
+        "length" : 40
+    },
+    "1" : {
+        "name" : "Chair Situps",
+        "imagesCount" : 2,
+        "repetitionLength" : 1.5
+    }
+}
