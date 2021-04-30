@@ -24,6 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Bloc
+  bloc:
+  flutter_bloc:
+
+  # Freezed
+  freezed_annotation: ^0.14.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -33,11 +40,20 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Freezed
+  build_runner:
+  freezed: ^0.14.0
+  json_serializable:
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - lib/Data/Json/exercises.json
+    - lib/Data/Json/workouts.json
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

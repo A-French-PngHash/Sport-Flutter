@@ -8,5 +8,9 @@
         "name" : "Chair Situps",
         "imagesCount" : 2,
         "repetitionLength" : 1.5
+    },
+    "2" : {
+        "name" : "Crucifixes",
+        "imagesCount" : 2
     }
 }
