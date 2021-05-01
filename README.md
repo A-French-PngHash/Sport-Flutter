@@ -8,17 +8,16 @@ It is a remake of my [previous fitness app](https://github.com/PngHash-Titouan/S
 
 There is a few different goals around the creation of this app :
 
-    - Enable the use of the fitness app on android (which wasn't possible with the previous one).
-    - Redesign the app for ease of use.
-    - Optimize app by using new techniques.
+- Enable the use of the fitness app on android (which wasn't possible with the previous one).
+- Redesign the app for ease of use.
+- Optimize app by using new techniques.
 
 ## Specifications
 
 ### Exercise storage
 
 All the different exercises are stored in one location : lib/Data/exercises.json
-Each exercise is a dictionary (value) associated with a number (key) (beginning from 0).
-
+This file contains a "exercises" element which is a list of all the exercise :
 
 |Key|Type|Purpose|Required|
 |--|--|--|--|
@@ -29,7 +28,8 @@ Each exercise is a dictionary (value) associated with a number (key) (beginning 
 
 ### Workout storage
 
-Workouts are stored in lib/Data/exercises.json. Each object is associated with a number starting from 0.
+Workouts are stored in lib/Data/exercises.json. 
+This file contains a "workouts" element which is a list of all the different workouts :
 
 |Key|Type|Purpose|Required
 |--|--|--|--|
