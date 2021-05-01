@@ -1,0 +1,22 @@
+{
+    "workouts": [
+        {
+            "name": "Test",
+            "exercises": [
+                "Bear Crawl",
+                "Chair Situps"
+            ],
+            "restTime": 8,
+            "workoutType": "arm"
+        },
+        {
+            "name": "Test 2",
+            "exercises": [
+                "Bear Crawl",
+                "Chair Situps"
+            ],
+            "restTime": 8,
+            "workoutType": "arm"
+        }
+    ]
+}

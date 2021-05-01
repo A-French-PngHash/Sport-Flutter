@@ -1,0 +1,18 @@
+{
+    "exercises": [
+        {
+            "name": "Bear Crawl",
+            "imagesCount": 2,
+            "length": 40
+        },
+        {
+            "name": "Chair Situps",
+            "imagesCount": 2,
+            "repetitionLength": 1.5
+        },
+        {
+            "name": "Crucifixes",
+            "imagesCount": 2
+        }
+    ]
+}

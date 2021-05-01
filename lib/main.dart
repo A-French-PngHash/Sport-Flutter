@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.light,
       title: 'Sport',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.deepOrange
       ),
       home: BlocProvider(
         create: (context) => WorkoutChoiceCubit(WorkoutRepository()),

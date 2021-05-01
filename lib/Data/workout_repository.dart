@@ -5,8 +5,14 @@ import 'dart:convert';
 class WorkoutRepository {
   /// Fetch the list of workouts.
   Future<List<Workout>> fetchWorkoutList() async {
-    final workoutString = await rootBundle.loadString("exercises.json");
-    final workoutJson = json.decode(workoutString);
-    return workoutJson;
+    final workoutString = await rootBundle.loadString("assets/workouts.json");
+    final workoutJson = await json.decode(workoutString);
+    print(workoutJson["workouts"]);
+    List<Workout> workoutList = [];
+    for (final element in workoutJson["workouts"] as List) {
+      workoutList.add(Workout.fromJson(element));
+    }
+
+    return workoutList;
   }
 }

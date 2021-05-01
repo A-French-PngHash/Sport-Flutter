@@ -21,4 +21,11 @@ class WorkoutChoiceCubit extends Cubit<WorkoutChoiceState> {
     }
     emit(WorkoutChoiceState(names));
   }
+
+  /// The user selected a workout.
+  ///
+  /// - name : Name of the selected workout.
+  void selectedWorkout(String name) {
+    print("Selected : $name");
+  }
 }
