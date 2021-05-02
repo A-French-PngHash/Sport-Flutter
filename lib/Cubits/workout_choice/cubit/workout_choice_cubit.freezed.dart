@@ -20,9 +20,10 @@ class _$WorkoutChoiceStateTearOff {
     return const _Initial();
   }
 
-  _WorkoutChoiceState call(List<dynamic> names) {
+  _WorkoutChoiceState call(List<dynamic> names, {Workout? workoutChosen}) {
     return _WorkoutChoiceState(
       names,
+      workoutChosen: workoutChosen,
     );
   }
 }
@@ -34,13 +35,13 @@ const $WorkoutChoiceState = _$WorkoutChoiceStateTearOff();
 mixin _$WorkoutChoiceState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<dynamic> names) $default, {
+    TResult Function(List<dynamic> names, Workout? workoutChosen) $default, {
     required TResult Function() initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<dynamic> names)? $default, {
+    TResult Function(List<dynamic> names, Workout? workoutChosen)? $default, {
     TResult Function()? initial,
     required TResult orElse(),
   }) =>
@@ -115,7 +116,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<dynamic> names) $default, {
+    TResult Function(List<dynamic> names, Workout? workoutChosen) $default, {
     required TResult Function() initial,
   }) {
     return initial();
@@ -124,7 +125,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<dynamic> names)? $default, {
+    TResult Function(List<dynamic> names, Workout? workoutChosen)? $default, {
     TResult Function()? initial,
     required TResult orElse(),
   }) {
@@ -166,7 +167,9 @@ abstract class _$WorkoutChoiceStateCopyWith<$Res> {
   factory _$WorkoutChoiceStateCopyWith(
           _WorkoutChoiceState value, $Res Function(_WorkoutChoiceState) then) =
       __$WorkoutChoiceStateCopyWithImpl<$Res>;
-  $Res call({List<dynamic> names});
+  $Res call({List<dynamic> names, Workout? workoutChosen});
+
+  $WorkoutCopyWith<$Res>? get workoutChosen;
 }
 
 /// @nodoc
@@ -183,27 +186,45 @@ class __$WorkoutChoiceStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? names = freezed,
+    Object? workoutChosen = freezed,
   }) {
     return _then(_WorkoutChoiceState(
       names == freezed
           ? _value.names
           : names // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      workoutChosen: workoutChosen == freezed
+          ? _value.workoutChosen
+          : workoutChosen // ignore: cast_nullable_to_non_nullable
+              as Workout?,
     ));
+  }
+
+  @override
+  $WorkoutCopyWith<$Res>? get workoutChosen {
+    if (_value.workoutChosen == null) {
+      return null;
+    }
+
+    return $WorkoutCopyWith<$Res>(_value.workoutChosen!, (value) {
+      return _then(_value.copyWith(workoutChosen: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_WorkoutChoiceState implements _WorkoutChoiceState {
-  _$_WorkoutChoiceState(this.names);
+  _$_WorkoutChoiceState(this.names, {this.workoutChosen});
 
   @override
   final List<dynamic> names;
+  @override
+  final Workout? workoutChosen;
 
   @override
   String toString() {
-    return 'WorkoutChoiceState(names: $names)';
+    return 'WorkoutChoiceState(names: $names, workoutChosen: $workoutChosen)';
   }
 
   @override
@@ -211,12 +232,17 @@ class _$_WorkoutChoiceState implements _WorkoutChoiceState {
     return identical(this, other) ||
         (other is _WorkoutChoiceState &&
             (identical(other.names, names) ||
-                const DeepCollectionEquality().equals(other.names, names)));
+                const DeepCollectionEquality().equals(other.names, names)) &&
+            (identical(other.workoutChosen, workoutChosen) ||
+                const DeepCollectionEquality()
+                    .equals(other.workoutChosen, workoutChosen)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(names);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(names) ^
+      const DeepCollectionEquality().hash(workoutChosen);
 
   @JsonKey(ignore: true)
   @override
@@ -226,21 +252,21 @@ class _$_WorkoutChoiceState implements _WorkoutChoiceState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<dynamic> names) $default, {
+    TResult Function(List<dynamic> names, Workout? workoutChosen) $default, {
     required TResult Function() initial,
   }) {
-    return $default(names);
+    return $default(names, workoutChosen);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<dynamic> names)? $default, {
+    TResult Function(List<dynamic> names, Workout? workoutChosen)? $default, {
     TResult Function()? initial,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(names);
+      return $default(names, workoutChosen);
     }
     return orElse();
   }
@@ -269,9 +295,11 @@ class _$_WorkoutChoiceState implements _WorkoutChoiceState {
 }
 
 abstract class _WorkoutChoiceState implements WorkoutChoiceState {
-  factory _WorkoutChoiceState(List<dynamic> names) = _$_WorkoutChoiceState;
+  factory _WorkoutChoiceState(List<dynamic> names, {Workout? workoutChosen}) =
+      _$_WorkoutChoiceState;
 
   List<dynamic> get names => throw _privateConstructorUsedError;
+  Workout? get workoutChosen => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$WorkoutChoiceStateCopyWith<_WorkoutChoiceState> get copyWith =>
       throw _privateConstructorUsedError;

@@ -12,6 +12,12 @@ There is a few different goals around the creation of this app :
 - Redesign the app for ease of use.
 - Optimize app by using new techniques.
 
+## Run it yourself
+
+1. Fetch packages with `flutter pub get`
+2. Generate files with `flutter pub run build_runner watch --delete-conflicting-outputs`
+3. Run it !
+
 ## Specifications
 
 ### Exercise storage
@@ -36,4 +42,4 @@ This file contains a "workouts" element which is a list of all the different wor
 |name|String|Name of the workout|YES
 |exercises|List\<String\>|List of exercises names. Names inputted in here must be present in exercises.json|YES
 |restTime|Int|Rest time between exercises. Does not include exercise announcement time|YES
-|workoutType|Type of the workout amongst the following ones : abs, arm, lowerBody |YES
+|workoutType|String|Type of the workout amongst the following ones : abs, arm, lowerBody |YES

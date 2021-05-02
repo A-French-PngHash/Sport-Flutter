@@ -3,5 +3,10 @@ part of 'workout_choice_cubit.dart';
 @freezed
 abstract class WorkoutChoiceState with _$WorkoutChoiceState {
   const factory WorkoutChoiceState.initial() = _Initial;
-  factory WorkoutChoiceState(List names) = _WorkoutChoiceState;
+
+  /// - names : Workout's names. The user can pick one.
+  /// - workoutChosen : When user picked a workout this variable becomes not null
+  /// and contains the chosen workout.
+  factory WorkoutChoiceState(List names, {Workout? workoutChosen}) =
+      _WorkoutChoiceState;
 }

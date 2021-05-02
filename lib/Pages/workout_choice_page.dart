@@ -7,15 +7,29 @@ class WorkoutChoicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: BlocBuilder<WorkoutChoiceCubit, WorkoutChoiceState>(
-            builder: (context, state) {
-          return state.maybeWhen((names) {
-            // Workout's names.
-            return buildListWithNames(names);
-          }, orElse: () => Text("Loading..."));
-        }),
-      ),
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(
+          "Pick a workout",
+          style: TextStyle(fontSize: 40),
+        ),
+        BlocConsumer<WorkoutChoiceCubit, WorkoutChoiceState>(
+          builder: (context, state) {
+            return state.maybeWhen((names, workout) {
+              // Workout's row.
+              return buildListWithNames(names);
+            }, orElse: () => Text("Loading..."));
+          },
+          listener: (context, state) {
+            state.maybeWhen((_, workoutChosen) {
+              if (workoutChosen != null) {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return Text("Workout chosen");
+                }));
+              }
+            }, orElse: () {});
+          },
+        ),
+      ]),
     );
   }
 

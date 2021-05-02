@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sport/Data/Model/workout/workout.dart';
 import 'package:sport/Data/workout_repository.dart';
 
 part 'workout_choice_state.dart';
