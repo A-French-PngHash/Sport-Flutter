@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sport/Cubits/workout_choice/cubit/workout_choice_cubit.dart';
-import 'package:sport/Data/Model/workout/workout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport/Cubits/workout_choice/workout_choice_cubit.dart';
 
 /// Row for a workout. Used in the list view where the user picks a workout.
 class WorkoutRow extends StatelessWidget {

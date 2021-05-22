@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport/Cubits/workout_choice/cubit/workout_choice_cubit.dart';
+import 'package:sport/Cubits/on_going_workout/on_going_workout_cubit.dart';
+import 'package:sport/Cubits/workout_choice/workout_choice_cubit.dart';
+import 'package:sport/Data/Model/workout/workout.dart';
+import 'package:sport/Data/exercise_repository.dart';
+import 'package:sport/Pages/on_going_workout_page.dart';
 import 'package:sport/Pages/workout_row.dart';
 
 class WorkoutChoicePage extends StatelessWidget {
@@ -22,9 +26,8 @@ class WorkoutChoicePage extends StatelessWidget {
           listener: (context, state) {
             state.maybeWhen((_, workoutChosen) {
               if (workoutChosen != null) {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return Text("Workout chosen");
-                }));
+                // Pushing new view here.
+                pushOnGoingWorkoutView(context, workoutChosen);
               }
             }, orElse: () {});
           },
@@ -33,8 +36,19 @@ class WorkoutChoicePage extends StatelessWidget {
     );
   }
 
+  void pushOnGoingWorkoutView(BuildContext context, Workout workoutChosen) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return BlocProvider(
+        create: (context) => OnGoingWorkoutCubit(workoutChosen, ExerciseRepository()),
+        child: OnGoingWorkoutPage(workoutChosen.name),
+      );
+    }));
+  }
+
   Widget buildListWithNames(List names) {
     return ListView(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       children: [
         ...names.map((e) {
           return WorkoutRow(e);

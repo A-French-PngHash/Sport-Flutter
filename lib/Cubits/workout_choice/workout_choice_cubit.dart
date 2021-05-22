@@ -15,18 +15,18 @@ class WorkoutChoiceCubit extends Cubit<WorkoutChoiceState> {
   }
 
   void _loadState() async {
-    final workouts = await _workoutRepository.fetchWorkoutList();
-    var names = [];
-    for (final workout in workouts) {
-      names.add(workout.name);
-    }
+    final names = await _workoutRepository.workoutNameList;
     emit(WorkoutChoiceState(names));
   }
 
   /// The user selected a workout.
   ///
   /// - name : Name of the selected workout.
-  void selectedWorkout(String name) {
-    print("Selected : $name");
+  void selectedWorkout(String name) async {
+    final workoutChosen = await _workoutRepository.workoutFromName(name);
+    emit(WorkoutChoiceState(
+      await _workoutRepository.workoutNameList,
+      workoutChosen: workoutChosen,
+    ));
   }
 }

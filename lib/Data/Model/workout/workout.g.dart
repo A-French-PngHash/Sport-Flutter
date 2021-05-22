@@ -9,7 +9,9 @@ part of 'workout.dart';
 _$_Workout _$_$_WorkoutFromJson(Map<String, dynamic> json) {
   return _$_Workout(
     json['name'] as String,
-    json['exercises'] as List<dynamic>,
+    (json['exercises'] as List<dynamic>)
+        .map((e) => e as Map<String, dynamic>)
+        .toList(),
     json['restTime'] as int,
     json['workoutType'] as String,
   );

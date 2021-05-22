@@ -12,9 +12,12 @@ part 'exercise.g.dart';
 class Exercise with _$Exercise {
   factory Exercise(
     String name,
-    int imagesCount, {
+    int imagesCount, 
+    int sets,
+    {
     int? length,
     double? repetitionLength,
+    int? reps,
   }) = _Exercise;
 
   factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);

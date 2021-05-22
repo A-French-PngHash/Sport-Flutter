@@ -20,8 +20,8 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
 class _$WorkoutTearOff {
   const _$WorkoutTearOff();
 
-  _Workout call(
-      String name, List<dynamic> exercises, int restTime, String workoutType) {
+  _Workout call(String name, List<Map<String, dynamic>> exercises, int restTime,
+      String workoutType) {
     return _Workout(
       name,
       exercises,
@@ -41,7 +41,8 @@ const $Workout = _$WorkoutTearOff();
 /// @nodoc
 mixin _$Workout {
   String get name => throw _privateConstructorUsedError;
-  List<dynamic> get exercises => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get exercises =>
+      throw _privateConstructorUsedError;
   int get restTime => throw _privateConstructorUsedError;
   String get workoutType => throw _privateConstructorUsedError;
 
@@ -55,7 +56,10 @@ abstract class $WorkoutCopyWith<$Res> {
   factory $WorkoutCopyWith(Workout value, $Res Function(Workout) then) =
       _$WorkoutCopyWithImpl<$Res>;
   $Res call(
-      {String name, List<dynamic> exercises, int restTime, String workoutType});
+      {String name,
+      List<Map<String, dynamic>> exercises,
+      int restTime,
+      String workoutType});
 }
 
 /// @nodoc
@@ -81,7 +85,7 @@ class _$WorkoutCopyWithImpl<$Res> implements $WorkoutCopyWith<$Res> {
       exercises: exercises == freezed
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<Map<String, dynamic>>,
       restTime: restTime == freezed
           ? _value.restTime
           : restTime // ignore: cast_nullable_to_non_nullable
@@ -100,7 +104,10 @@ abstract class _$WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
       __$WorkoutCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name, List<dynamic> exercises, int restTime, String workoutType});
+      {String name,
+      List<Map<String, dynamic>> exercises,
+      int restTime,
+      String workoutType});
 }
 
 /// @nodoc
@@ -127,7 +134,7 @@ class __$WorkoutCopyWithImpl<$Res> extends _$WorkoutCopyWithImpl<$Res>
       exercises == freezed
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<Map<String, dynamic>>,
       restTime == freezed
           ? _value.restTime
           : restTime // ignore: cast_nullable_to_non_nullable
@@ -151,7 +158,7 @@ class _$_Workout implements _Workout {
   @override
   final String name;
   @override
-  final List<dynamic> exercises;
+  final List<Map<String, dynamic>> exercises;
   @override
   final int restTime;
   @override
@@ -199,15 +206,16 @@ class _$_Workout implements _Workout {
 }
 
 abstract class _Workout implements Workout {
-  factory _Workout(String name, List<dynamic> exercises, int restTime,
-      String workoutType) = _$_Workout;
+  factory _Workout(String name, List<Map<String, dynamic>> exercises,
+      int restTime, String workoutType) = _$_Workout;
 
   factory _Workout.fromJson(Map<String, dynamic> json) = _$_Workout.fromJson;
 
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  List<dynamic> get exercises => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get exercises =>
+      throw _privateConstructorUsedError;
   @override
   int get restTime => throw _privateConstructorUsedError;
   @override

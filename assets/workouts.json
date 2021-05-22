@@ -3,8 +3,16 @@
         {
             "name": "Test",
             "exercises": [
-                "Bear Crawl",
-                "Chair Situps"
+                {
+                    "name": "Bear Crawl",
+                    "length" : 30,
+                    "sets" : 1
+                },
+                {
+                    "name" : "Chair Situps",
+                    "repetitions" : 30,
+                    "sets" : 1
+                }
             ],
             "restTime": 8,
             "workoutType": "arm"
@@ -12,8 +20,16 @@
         {
             "name": "Test 2",
             "exercises": [
-                "Bear Crawl",
-                "Chair Situps"
+                {
+                    "name": "Bear Crawl",
+                    "length" : 60,
+                    "sets" : 1
+                },
+                {
+                    "name" : "Chair Situps",
+                    "repetitions" : 30,
+                    "sets" : 1
+                }
             ],
             "restTime": 8,
             "workoutType": "arm"

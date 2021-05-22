@@ -20,13 +20,15 @@ Exercise _$ExerciseFromJson(Map<String, dynamic> json) {
 class _$ExerciseTearOff {
   const _$ExerciseTearOff();
 
-  _Exercise call(String name, int imagesCount,
-      {int? length, double? repetitionLength}) {
+  _Exercise call(String name, int imagesCount, int sets,
+      {int? length, double? repetitionLength, int? reps}) {
     return _Exercise(
       name,
       imagesCount,
+      sets,
       length: length,
       repetitionLength: repetitionLength,
+      reps: reps,
     );
   }
 
@@ -42,8 +44,10 @@ const $Exercise = _$ExerciseTearOff();
 mixin _$Exercise {
   String get name => throw _privateConstructorUsedError;
   int get imagesCount => throw _privateConstructorUsedError;
+  int get sets => throw _privateConstructorUsedError;
   int? get length => throw _privateConstructorUsedError;
   double? get repetitionLength => throw _privateConstructorUsedError;
+  int? get reps => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +60,12 @@ abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
       _$ExerciseCopyWithImpl<$Res>;
   $Res call(
-      {String name, int imagesCount, int? length, double? repetitionLength});
+      {String name,
+      int imagesCount,
+      int sets,
+      int? length,
+      double? repetitionLength,
+      int? reps});
 }
 
 /// @nodoc
@@ -71,8 +80,10 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? imagesCount = freezed,
+    Object? sets = freezed,
     Object? length = freezed,
     Object? repetitionLength = freezed,
+    Object? reps = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -83,6 +94,10 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
           ? _value.imagesCount
           : imagesCount // ignore: cast_nullable_to_non_nullable
               as int,
+      sets: sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as int,
       length: length == freezed
           ? _value.length
           : length // ignore: cast_nullable_to_non_nullable
@@ -91,6 +106,10 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
           ? _value.repetitionLength
           : repetitionLength // ignore: cast_nullable_to_non_nullable
               as double?,
+      reps: reps == freezed
+          ? _value.reps
+          : reps // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -101,7 +120,12 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       __$ExerciseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name, int imagesCount, int? length, double? repetitionLength});
+      {String name,
+      int imagesCount,
+      int sets,
+      int? length,
+      double? repetitionLength,
+      int? reps});
 }
 
 /// @nodoc
@@ -117,8 +141,10 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? imagesCount = freezed,
+    Object? sets = freezed,
     Object? length = freezed,
     Object? repetitionLength = freezed,
+    Object? reps = freezed,
   }) {
     return _then(_Exercise(
       name == freezed
@@ -129,6 +155,10 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
           ? _value.imagesCount
           : imagesCount // ignore: cast_nullable_to_non_nullable
               as int,
+      sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as int,
       length: length == freezed
           ? _value.length
           : length // ignore: cast_nullable_to_non_nullable
@@ -137,6 +167,10 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
           ? _value.repetitionLength
           : repetitionLength // ignore: cast_nullable_to_non_nullable
               as double?,
+      reps: reps == freezed
+          ? _value.reps
+          : reps // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -144,8 +178,8 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Exercise implements _Exercise {
-  _$_Exercise(this.name, this.imagesCount,
-      {this.length, this.repetitionLength});
+  _$_Exercise(this.name, this.imagesCount, this.sets,
+      {this.length, this.repetitionLength, this.reps});
 
   factory _$_Exercise.fromJson(Map<String, dynamic> json) =>
       _$_$_ExerciseFromJson(json);
@@ -155,13 +189,17 @@ class _$_Exercise implements _Exercise {
   @override
   final int imagesCount;
   @override
+  final int sets;
+  @override
   final int? length;
   @override
   final double? repetitionLength;
+  @override
+  final int? reps;
 
   @override
   String toString() {
-    return 'Exercise(name: $name, imagesCount: $imagesCount, length: $length, repetitionLength: $repetitionLength)';
+    return 'Exercise(name: $name, imagesCount: $imagesCount, sets: $sets, length: $length, repetitionLength: $repetitionLength, reps: $reps)';
   }
 
   @override
@@ -173,11 +211,15 @@ class _$_Exercise implements _Exercise {
             (identical(other.imagesCount, imagesCount) ||
                 const DeepCollectionEquality()
                     .equals(other.imagesCount, imagesCount)) &&
+            (identical(other.sets, sets) ||
+                const DeepCollectionEquality().equals(other.sets, sets)) &&
             (identical(other.length, length) ||
                 const DeepCollectionEquality().equals(other.length, length)) &&
             (identical(other.repetitionLength, repetitionLength) ||
                 const DeepCollectionEquality()
-                    .equals(other.repetitionLength, repetitionLength)));
+                    .equals(other.repetitionLength, repetitionLength)) &&
+            (identical(other.reps, reps) ||
+                const DeepCollectionEquality().equals(other.reps, reps)));
   }
 
   @override
@@ -185,8 +227,10 @@ class _$_Exercise implements _Exercise {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(imagesCount) ^
+      const DeepCollectionEquality().hash(sets) ^
       const DeepCollectionEquality().hash(length) ^
-      const DeepCollectionEquality().hash(repetitionLength);
+      const DeepCollectionEquality().hash(repetitionLength) ^
+      const DeepCollectionEquality().hash(reps);
 
   @JsonKey(ignore: true)
   @override
@@ -200,8 +244,8 @@ class _$_Exercise implements _Exercise {
 }
 
 abstract class _Exercise implements Exercise {
-  factory _Exercise(String name, int imagesCount,
-      {int? length, double? repetitionLength}) = _$_Exercise;
+  factory _Exercise(String name, int imagesCount, int sets,
+      {int? length, double? repetitionLength, int? reps}) = _$_Exercise;
 
   factory _Exercise.fromJson(Map<String, dynamic> json) = _$_Exercise.fromJson;
 
@@ -210,9 +254,13 @@ abstract class _Exercise implements Exercise {
   @override
   int get imagesCount => throw _privateConstructorUsedError;
   @override
+  int get sets => throw _privateConstructorUsedError;
+  @override
   int? get length => throw _privateConstructorUsedError;
   @override
   double? get repetitionLength => throw _privateConstructorUsedError;
+  @override
+  int? get reps => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ExerciseCopyWith<_Exercise> get copyWith =>

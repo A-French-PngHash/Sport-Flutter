@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport/Cubits/workout_choice/cubit/workout_choice_cubit.dart';
 import 'package:sport/Data/workout_repository.dart';
 import 'package:sport/Pages/workout_choice_page.dart';
+
+import 'Cubits/workout_choice/workout_choice_cubit.dart';
 
 void main() {
   runApp(MyApp());
