@@ -10,7 +10,7 @@
                 },
                 {
                     "name" : "Chair Situps",
-                    "repetitions" : 30,
+                    "reps" : 30,
                     "sets" : 1
                 }
             ],
@@ -22,12 +22,12 @@
             "exercises": [
                 {
                     "name": "Bear Crawl",
-                    "length" : 60,
+                    "reps" : 60,
                     "sets" : 1
                 },
                 {
                     "name" : "Chair Situps",
-                    "repetitions" : 30,
+                    "reps" : 30,
                     "sets" : 1
                 }
             ],

@@ -18,6 +18,25 @@ There is a few different goals around the creation of this app :
 2. Generate files with `flutter pub run build_runner watch --delete-conflicting-outputs`
 3. Run it !
 
+## Exercises - Explained
+
+There is two type of exercise :
+ - **length exercises**
+ - **reps exercises**
+
+**Where is defined the type of a specific exercise ?** 
+When the length field is set in a workout's exercise, then this exercise will be of type length. If it is not set then the field reps  must be set, which means it will be a "reps exercise". Then to differentiate between the two types of reps exercise, we have to look if the repetitionsLength field is set (in exercises.json). 
+
+### Length exercises
+Those are exercises that have a fixed length of time. When this time expires, the app will automatically move on to the next exercise. **How to recognize** : Length parameter **is set** (in workouts.json)
+
+### Reps exercises
+Reps exercises have a fixed rep number. There is two different approach to having a rep exercise. **How to recognize** : For both of them, the length parameter is not provided and the rep one is (in workouts.json).
+
+The first one is, the app count each rep while the user is doing it. This imposes a rythm for the user to follow. When the count is finished, the app automatically moves to the next exercise. **How to recognize** : repetitionLength (in exercises.json) **is set**.
+
+The second one meanwhile, leaves it to the user to count for himself. The app will just display how many reps he is suppose to do. The user then manually go to the next exercise (by pressing an arrow on the screen). **How to recognize** : repetitionLength (in exercises.json) **is not set**.
+
 ## Specifications
 
 ### Exercise storage
@@ -49,7 +68,7 @@ This is the specification for each row of the exercise list. This list is presen
 |--|--|--|--|
 |name|String|Names inputted in here must be present in exercises.json.|YES
 |length|Int|Number of seconds the exercise should last.|NO
-|repetitions|Int|Number of repetition.|NO
+|reps|Int|Number of repetition.|NO
 |sets|Int|Number of set. Each set contains the given number of repetition|YES
 
 Either (length) *or* (repetitions) must be provided.
