@@ -49,6 +49,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     emit(OnGoingWorkoutState.ExerciseInProgress(name, sets, repCount: reps, secondsLeft: length));
 
     // Announcing the exercise
-    await audioPlayer.announceExercise(current, () => {print("Finished anounchment.")});
+    await audioPlayer.announceExercise(current);
+    print("done");
   }
 }
