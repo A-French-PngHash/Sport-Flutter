@@ -7,11 +7,6 @@
                     "name": "Bear Crawl",
                     "length" : 30,
                     "sets" : 1
-                },
-                {
-                    "name" : "Chair Situps",
-                    "reps" : 30,
-                    "sets" : 1
                 }
             ],
             "restTime": 8,

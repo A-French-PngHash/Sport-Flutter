@@ -57,7 +57,7 @@ flutter:
   assets:
     - assets/exercises.json
     - assets/workouts.json
-    - assets/Audio/Announcments/test.mp3
+    - assets/images/
 
 
   # The following line ensures that the Material Icons font is

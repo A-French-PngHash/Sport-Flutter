@@ -13,7 +13,8 @@ class OnGoingWorkoutState with _$OnGoingWorkoutState {
   /// 
   /// - imgUrl : Local url of the image to be displayed.
   /// - setCount : Number of set for this exercise.
+  /// - currentSet : Current set the user is doing.
   /// - repCount : Number of rep for this exercise. Optional because some exercise have a duration instead of a number of reps.
   /// - secondsLeft : Number of seconds left. Is optional because some exercise don't have a set number of seconds.
-  factory OnGoingWorkoutState.ExerciseInProgress(String imgUrl, int setCount, {int? repCount, int? secondsLeft}) = _Exercise;
+  factory OnGoingWorkoutState.ExerciseInProgress(String imgUrl, int setCount, int currentSet, {int? repCount, int? secondsLeft}) = _Exercise;
 }

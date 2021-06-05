@@ -72,4 +72,11 @@ class SportAudioPlayer {
   anounceEndOfWorkout() async {
     await flutterTts.speak("This is the end of this workout, good job !");
   }
+
+  /// Anounce the given number.
+  ///
+  /// Usually used to count the reps.
+  anounceNumber(int number) {
+    flutterTts.speak(number.toString());
+  }
 }

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport/Cubits/on_going_workout/on_going_workout_cubit.dart';
 
 class OnGoingWorkoutPage extends StatelessWidget {
-
   /// Name used to display a title.
   final String _workoutName;
 
@@ -33,14 +32,26 @@ class OnGoingWorkoutPage extends StatelessWidget {
     return Text("Rest : $secondLeft");
   }
 
-  Widget buildExerciseInProgress(String imageUrl, int setCount, int? repCount, int? secondsRemaining) {
-      return Column(
-        children: [
-          Text("imageUrl : $imageUrl"),
-          Text("setCount : $setCount"),
-          Text("repCount : $repCount"),
-          Text("secondsRemaining : $secondsRemaining")
-        ],
-      );
+  Widget buildExerciseInProgress(String imageUrl, int setCount, int currentSet, int? repCount, int? secondsRemaining) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          secondsRemaining.toString(),
+          style: TextStyle(fontSize: 30),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [Text("$currentSet/$setCount")],
+        ),
+        Text("Image"),
+        Spacer(),
+        Text("imageUrl : $imageUrl"),
+        Text("setCount : $setCount"),
+        Text("repCount : $repCount"),
+        Text("secondsRemaining : $secondsRemaining"),
+        Text("current set : $currentSet"),
+      ],
+    );
   }
 }
