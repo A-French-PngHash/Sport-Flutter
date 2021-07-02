@@ -79,4 +79,9 @@ class SportAudioPlayer {
   anounceNumber(int number) {
     flutterTts.speak(number.toString());
   }
+
+  /// Stops all anouncment currently playing.
+  stop() {
+    flutterTts.stop();
+  }
 }

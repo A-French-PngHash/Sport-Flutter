@@ -1,12 +1,29 @@
 {
     "workouts": [
         {
+            "name": "Zottman test",
+            "exercises": [
+                {
+                    "name": "Zottman Curl",
+                    "reps": 10,
+                    "sets": 3
+                },
+                {
+                    "name": "Zottman Curl",
+                    "reps": 8,
+                    "sets": 2
+                }
+            ],
+            "restTime": 12,
+            "workoutType": "arm"
+        },
+        {
             "name": "Test",
             "exercises": [
                 {
                     "name": "Bear Crawl",
-                    "length" : 30,
-                    "sets" : 1
+                    "length": 30,
+                    "sets": 1
                 }
             ],
             "restTime": 8,
@@ -17,13 +34,13 @@
             "exercises": [
                 {
                     "name": "Bear Crawl",
-                    "reps" : 60,
-                    "sets" : 1
+                    "reps": 60,
+                    "sets": 1
                 },
                 {
-                    "name" : "Chair Situps",
-                    "reps" : 30,
-                    "sets" : 1
+                    "name": "Chair Situps",
+                    "reps": 30,
+                    "sets": 1
                 }
             ],
             "restTime": 8,

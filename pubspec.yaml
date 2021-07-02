@@ -57,7 +57,7 @@ flutter:
   assets:
     - assets/exercises.json
     - assets/workouts.json
-    - assets/images/
+    - assets/images/Zottman Curl/
 
 
   # The following line ensures that the Material Icons font is

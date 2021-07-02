@@ -1,12 +1,15 @@
 {
-    "Bear Crawl" : {
+    "Bear Crawl": {
         "imagesCount": 2
     },
-    "Chair Situps" : {
+    "Chair Situps": {
         "imagesCount": 2,
         "repetitionLength": 1.5
     },
-    "Crucifixes" : {
+    "Crucifixes": {
         "imagesCount": 2
+    },
+    "Zottman Curl": {
+        "imagesCount": 4
     }
 }
