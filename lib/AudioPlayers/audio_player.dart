@@ -14,7 +14,7 @@ class SportAudioPlayer {
   SportAudioPlayer() {
     flutterTts = FlutterTts();
     flutterTts.awaitSpeakCompletion(true);
-    flutterTts.setSpeechRate(0.4);
+    flutterTts.setSpeechRate(0.56);
     flutterTts.setPitch(1);
     flutterTts.isLanguageAvailable("en-IE").then((available) => {
           if (available) {flutterTts.setLanguage("en-IE")} else {flutterTts.setLanguage("en-US")}
@@ -61,9 +61,9 @@ class SportAudioPlayer {
   /// Is done at the end of each set if another one is coming up.
   ///
   /// - previousSet : The set count
-  anounceNextSet(Exercise exercise, int previousSet) async {
+  anounceNextSet(Exercise exercise, int currentSet) async {
     await flutterTts
-        .speak("Fantastic, Now prepare for the next set, set ${previousSet + 1} of ${exercise.sets}, get ready, and");
+        .speak("Fantastic, Now prepare for the next set, set ${currentSet} of ${exercise.sets}, get ready, and");
   }
 
   /// Anounce the end of the workout.

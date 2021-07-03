@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -41,6 +39,8 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   /// we need to keep a reference to it.
   Timer? exerciseSetTimer;
 
+  Timer? restTimer;
+
   Exercise get current {
     return exerciseTracker.current;
   }
@@ -50,7 +50,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   /// The exercise must be of type length and currentSetStartedAt must not be null.
   int? get secondsLeft {
     if (currentSetStartedAt != null && current.length != null) {
-      return (current.length! - ((DateTime.now().millisecondsSinceEpoch - currentSetStartedAt!) / 1000)).floor();
+      return (current.length! - ((DateTime.now().millisecondsSinceEpoch - currentSetStartedAt!) / 1000)).ceil();
     } else if (current.reps == null) {
       // The exercise is of type length but the currentRestStartedAt hasnt been set. In this case, the user is at the begining of the exercise.
       return current.length;
@@ -81,8 +81,9 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
 
   /// Called when the current exercise ended.
   ///
-  /// We need to start the rest period here.
-  finishedExercise() async {
+  /// Rest period initiated here.
+  void finishedExercise() async {
+    _imageService.stop();
     if (exerciseTracker.isLast) {
       audioPlayer.anounceEndOfWorkout();
       return;
@@ -95,21 +96,41 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     emit(OnGoingWorkoutState.Rest(_workout.restTime));
 
     // Rest timer.
-    Timer.periodic(Duration(milliseconds: 100), (timer) {
+    restTimer = Timer.periodic(Duration(milliseconds: 100), (timer) {
       if (restSecondLeft! <= 0) {
         // Rest ended.
         exerciseTracker.next().then((value) {
+          // Goes to the next exercise.
           startExerciseForCurrent();
-          timer.cancel();
+          timer.cancel(); // Cancel the timer (to prevent executing this code another time)
+          restTimer = null;
         });
       }
       emit(OnGoingWorkoutState.Rest(restSecondLeft!));
     });
   }
 
+  void goStraightToNext() {
+    try {
+      restTimer!.cancel();
+    } catch (Exception) {
+      // Catching "Null check operator used on a null value".
+      // We can't just check if the value is null and then cancel the timer, 
+      // because between the moment when we looked and the moment when we 
+      // actually cancel, the value might have become null (due to the rest time
+      // ending, if THE ******* USER TAPED THE NEXT BUTTON RIGHT AT THE END OF
+      // REST TIME). 
+    }
+
+    _imageService.stop();
+    exerciseTracker.next().then((value) => {startExerciseForCurrent()});
+  }
+
   /// Start the exercise set as "current". This is called when the exercise just
   /// got set as current and needs to be started.
-  startExerciseForCurrent() async {
+  ///
+  /// Reset the set value.
+  void startExerciseForCurrent() async {
     if (current.reps == null && current.length == null) {
       throw "Unknown exercise type. Both length and reps parameters are null for object ${exerciseTracker.current}";
     }
@@ -122,26 +143,30 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   /// Called when the current set ended. The function then does different things
   /// depending on the current state.
   finishedSet() {
+    _imageService.stop();
     if (exerciseSetTimer != null) {
       exerciseSetTimer!.cancel();
       exerciseSetTimer = null;
     }
     // Increasing the set count.
-    currentSetCount += 1;
-    if (current.sets < currentSetCount) {
+    if (current.sets < currentSetCount + 1) {
       // All sets are finished. Switching to next exercise.
       finishedExercise();
     } else {
+      currentSetCount += 1;
       startSetForCurrentExercise();
     }
   }
 
   /// Start the set.
+  ///
+  /// Reset the rep value.
   startSetForCurrentExercise() async {
     final name = current.name;
     final sets = current.sets;
     final reps = current.reps;
     final length = current.length;
+    currentRepCount = 1;
 
     // Emit the initial state.
     emitCurrent();
@@ -153,6 +178,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
 
     currentSetStartedAt = DateTime.now().millisecondsSinceEpoch;
     _imageService.startFor(current, (imageUrl) {
+      print("changed image");
       emitCurrent(imageUrl: imageUrl);
     });
     if (length != null) {
@@ -162,7 +188,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
           // The set ends now.
           finishedSet();
         }
-        emitCurrent();
+        emitCurrent(imageUrl: _imageService.currentImage);
       });
     } else {
       if (current.repetitionLength != null) {
@@ -198,18 +224,19 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       exerciseSetTimer!.cancel();
       exerciseSetTimer = null;
     }
-
-    //TODO: - Check if user is in a rest time
-
-    if (current.reps != null && current.repetitionLength == null) {
+    if (current.reps != null && current.repetitionLength == null && currentRestStartedAt == null) {
       // Starts rest time.
       audioPlayer.stop();
       finishedExercise();
     } else {
-      // Jumps to next exercise.
+      // Jumps to next exercise (the user didn't complete the current exercise
+      // so we assume he just wants to skip straight to the next one).
+      audioPlayer.stop();
+      goStraightToNext();
     }
   }
 
+  /// Goes back to the previous exercise.
   previousButtonPressed() {}
 
   /// Emit the current exercise state.

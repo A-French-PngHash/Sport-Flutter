@@ -54,7 +54,7 @@ class OnGoingWorkoutPage extends StatelessWidget {
         Spacer(),
         Text(
           formatTime(secondLeft),
-          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 40),
+          style: TextStyle(color: Color(0xFF30302E), fontWeight: FontWeight.bold, fontSize: 40),
         ),
         Spacer(),
         ExerciseNavigation(),

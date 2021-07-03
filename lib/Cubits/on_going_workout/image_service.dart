@@ -8,6 +8,8 @@ class ImageService {
   Exercise? currentExercise;
   String extension = "jpeg";
 
+  Timer? currentTimer;
+
   /// Start the displaying of images for the exercise given.
   ///
   /// - exercise : The exercise to start the displaying of images for.
@@ -20,23 +22,27 @@ class ImageService {
       imageDisplayTime = exercise.repetitionLength! / exercise.reps!;
     }
     currentExercise = exercise;
-    Timer.periodic(Duration(milliseconds: (imageDisplayTime * 1000).floor()), (timer) {
-      if (currentExercise == null) {
-        timer.cancel();
-        return;
-      }
+    currentTimer = Timer.periodic(Duration(milliseconds: (imageDisplayTime * 1000).floor()), (timer) {
       currentImageIndex += 1;
       if (currentImageIndex > exercise.imagesCount) {
         // Reached the last image, starting again.
         currentImageIndex = 1;
       }
-      imageChanged(urlDomainFor()! + "${currentExercise!.name} $currentImageIndex.$extension");
+      imageChanged(currentImage);
     });
+  }
+
+  String get currentImage {
+    return urlDomainFor()! + "${currentExercise!.name} $currentImageIndex.$extension";
   }
 
   /// Stop changing images.
   stop() {
     currentExercise = null;
+    if (currentTimer != null) {
+      currentTimer!.cancel();
+      currentTimer = null;
+    }
   }
 
   /// Returns the first image for the given exercise.

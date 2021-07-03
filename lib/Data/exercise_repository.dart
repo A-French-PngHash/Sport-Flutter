@@ -6,16 +6,16 @@ import 'package:sport/Data/Model/exercise/exercise.dart';
 import 'Model/workout/workout.dart';
 
 class ExerciseRepository {
-  Map<String, Exercise>? _exercises;
+  List<Exercise>? _exercises;
 
-  Future<Map<String, Exercise>> exerciseList(Workout workout) async {
+  Future<List<Exercise>> exerciseList(Workout workout) async {
     if (_exercises != null) {
       // Exercises are already loaded.
-      return Future<Map<String, Exercise>>.value(_exercises);
+      return Future<List<Exercise>>.value(_exercises);
     } else {
       // Exercises need to be loaded.
 
-      _exercises = new Map();
+      _exercises = [];
       // List of every exercise including the one not present in the workout.
       final fullExerciseList = await json.decode(await rootBundle.loadString("assets/exercises.json"));
 
@@ -33,9 +33,9 @@ class ExerciseRepository {
         element["repetitionLength"] = exo["repetitionLength"] as double?;
 
         Exercise exercise = Exercise.fromJson(element);
-        _exercises![exercise.name] = exercise;
+        _exercises!.add(exercise);
       }
-      return Future<Map<String, Exercise>>.value(_exercises);
+      return Future<List<Exercise>>.value(_exercises);
     }
   }
 }
