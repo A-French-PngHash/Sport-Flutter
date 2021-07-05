@@ -30,7 +30,13 @@ class ExerciseRepository {
           throw "Exercise does not have the same name in exercises.json. The exercise name is ${element['name']}";
         }
         element["imagesCount"] = exo["imagesCount"] as int;
-        element["repetitionLength"] = exo["repetitionLength"] as double?;
+        var repetition_length = exo["repetitionLength"];
+        if (repetition_length != null) {
+          if (repetition_length is int) {
+            repetition_length = repetition_length.toDouble();
+          }
+        }
+        element["repetitionLength"] = repetition_length;
 
         Exercise exercise = Exercise.fromJson(element);
         _exercises!.add(exercise);

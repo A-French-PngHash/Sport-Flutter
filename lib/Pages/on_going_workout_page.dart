@@ -14,6 +14,13 @@ class OnGoingWorkoutPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("$_workoutName"),
+        leading: BackButton(
+          onPressed: () {
+            final cubit = context.read<OnGoingWorkoutCubit>();
+            cubit.backButtonPressed();
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: BlocBuilder<OnGoingWorkoutCubit, OnGoingWorkoutState>(
         builder: (context, state) {
@@ -41,9 +48,11 @@ class OnGoingWorkoutPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [Text("$setCount/$currentSet")],
         ),
-        
-        Flexible(child:Image.asset(imageUrl, gaplessPlayback: true,)),
-        
+        Flexible(
+            child: Image.asset(
+          imageUrl,
+          gaplessPlayback: true,
+        )),
         ExerciseNavigation(),
       ],
     );

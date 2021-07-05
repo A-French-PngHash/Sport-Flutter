@@ -257,6 +257,16 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     exerciseTracker.previous().then((value) => {startExerciseForCurrent()});
   }
 
+  /// The button for quitting the current workout is pressed.
+  backButtonPressed() {
+    audioPlayer.stop();
+    _imageService.stop();
+    _cancelRestTimer();
+    if (exerciseSetTimer != null) {
+      exerciseSetTimer!.cancel();
+    }
+  }
+
   /// Emit the current exercise state.
   ///
   /// - imageUrl : Url of the image to display. Optional, if not provided then

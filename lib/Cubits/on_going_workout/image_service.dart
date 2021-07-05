@@ -28,7 +28,7 @@ class ImageService {
     currentImageIndex = 1;
     if (exercise.repetitionLength != null && exercise.reps != null) {
       // We know the time between each rep. It is possible to adjust the time the images get displayed.
-      imageDisplayTime = exercise.repetitionLength! / exercise.reps!;
+      imageDisplayTime = exercise.repetitionLength! / exercise.imagesCount;
     }
     currentExercise = exercise;
     currentTimer = Timer.periodic(Duration(milliseconds: (imageDisplayTime * 1000).floor()), (timer) {
