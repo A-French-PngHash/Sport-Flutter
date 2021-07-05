@@ -4,12 +4,12 @@
             "name": "Zottman test",
             "exercises": [
                 {
-                    "name": "Zottman Curl",
+                    "name": "Zottman Curls",
                     "length": 5,
                     "sets": 3
                 },
                 {
-                    "name": "Zottman Curl",
+                    "name": "Zottman Curls",
                     "reps": 8,
                     "sets": 2
                 }

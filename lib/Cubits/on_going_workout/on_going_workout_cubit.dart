@@ -17,7 +17,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   Workout _workout;
   late ExerciseTracker exerciseTracker;
   late SportAudioPlayer audioPlayer;
-  ImageService _imageService = ImageService();
+  late ImageService _imageService;
 
   /// Beginning of the current set. Unix timestamp.
   int? currentSetStartedAt;
@@ -68,11 +68,23 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   int currentSetCount = 1;
 
   OnGoingWorkoutCubit(this._workout, ExerciseRepository exerciseRepository) : super(OnGoingWorkoutState.initial()) {
-    this.audioPlayer = SportAudioPlayer();
-    _loadExerciseTracker(exerciseRepository).then((value) => _startWorkout());
+    _loadServices(exerciseRepository).then((value) => {_startWorkout()});
   }
 
-  /// Load the exercise tracker. Once it is loaded, the workout can begin.
+  /// Load services used by this cubit. These includes ImageService,
+  /// ExerciseTracker and SportAudioPlayer.
+  Future _loadServices(
+    ExerciseRepository exerciseRepository,
+  ) async {
+    this.audioPlayer = SportAudioPlayer();
+    await _loadImageService();
+    await _loadExerciseTracker(exerciseRepository);
+  }
+
+  Future _loadImageService() async {
+    this._imageService = await ImageService.create();
+  }
+
   Future _loadExerciseTracker(
     ExerciseRepository exerciseRepository,
   ) async {
@@ -115,11 +127,11 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       restTimer!.cancel();
     } catch (Exception) {
       // Catching "Null check operator used on a null value".
-      // We can't just check if the value is null and then cancel the timer, 
-      // because between the moment when we looked and the moment when we 
+      // We can't just check if the value is null and then cancel the timer,
+      // because between the moment when we looked and the moment when we
       // actually cancel, the value might have become null (due to the rest time
       // ending, if THE ******* USER TAPED THE NEXT BUTTON RIGHT AT THE END OF
-      // REST TIME). 
+      // REST TIME).
     }
 
     _imageService.stop();

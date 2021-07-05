@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport/Data/workout_repository.dart';
-import 'package:sport/Pages/test_image.dart';
 import 'package:sport/Pages/workout_choice_page.dart';
 import 'package:sport/Theme/theme.dart';
 
@@ -18,10 +17,10 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       title: 'Sport',
       theme: Themes().theme1,
-      home: TestImage() /*BlocProvider(
+      home: BlocProvider(
         create: (context) => WorkoutChoiceCubit(WorkoutRepository()),
         child: WorkoutChoicePage(),
-      ),*/
+      ),
     );
   }
 }

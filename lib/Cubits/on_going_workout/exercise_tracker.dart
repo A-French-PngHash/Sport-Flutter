@@ -28,7 +28,7 @@ class ExerciseTracker {
     var component = ExerciseTracker._create(_exerciseRepository, _workout);
     // Exercises gets shuffled here :
     component._exList = (await component._exerciseRepository.exerciseList(_workout))..shuffle();
-    component._exList.insert(0, Exercise("Zottman Curl", 4, 3, length: 20));
+    component._exList.insert(0, Exercise("Zottman Curls", 4, 3, length: 20));
     await component._loadCurrent();
     return component;
   }
