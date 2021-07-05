@@ -72,3 +72,9 @@ This is the specification for each row of the exercise list. This list is presen
 |sets|Int|Number of set. Each set contains the given number of repetition|YES
 
 Either (length) *or* (repetitions) must be provided.
+
+## More about the code
+
+You can learn more about the code in the following files : 
+
+    - [services.md](services.md) : Describe the different local services used in the app.
