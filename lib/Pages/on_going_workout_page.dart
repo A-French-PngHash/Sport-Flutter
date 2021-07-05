@@ -41,7 +41,9 @@ class OnGoingWorkoutPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [Text("$setCount/$currentSet")],
         ),
-        Flexible(child: Image.asset(imageUrl)),
+        
+        Flexible(child:Image.asset(imageUrl, gaplessPlayback: true,)),
+        
         ExerciseNavigation(),
       ],
     );
