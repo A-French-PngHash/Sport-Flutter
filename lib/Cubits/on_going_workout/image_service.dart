@@ -91,6 +91,5 @@ Future<Map<String, String>> _getImagePaths() async {
     final key = i.split("/").last.replaceAll("%20", " ").split(".").first;
     path_map[key] = i.replaceAll("%20", " ");
   }
-  print(path_map);
   return path_map;
 }

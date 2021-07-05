@@ -26,14 +26,18 @@ class ExerciseTracker {
     var component = ExerciseTracker._create(_exerciseRepository);
     // Exercises gets shuffled here :
     component._exList = (await component._exerciseRepository.exerciseList(_workout))..shuffle();
-    component._exList.insert(0, Exercise("Zottman Curls", 4, 3, length: 20));
     await component._loadCurrent();
     return component;
   }
 
-  /// Wether the current exercise is the last.
+  /// Whether the current exercise is the last.
   bool get isLast {
     return (_exerciseIndex >= _exList.length - 1);
+  }
+
+  /// Whethere the current exercise is the first.
+  bool get isFirst {
+    return _exerciseIndex == 0;
   }
 
   /// Go to the next exercise.
@@ -41,6 +45,14 @@ class ExerciseTracker {
     if (!isLast) {
       // Can go to the next one.
       _exerciseIndex += 1;
+      await _loadCurrent();
+    }
+  }
+
+  Future previous() async {
+    if (!isFirst) {
+      // Can go to the previous one.
+      _exerciseIndex -= 1;
       await _loadCurrent();
     }
   }

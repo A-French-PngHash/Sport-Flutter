@@ -122,7 +122,8 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     });
   }
 
-  void goStraightToNext() {
+  /// Cancels the rest timer.
+  void _cancelRestTimer() {
     try {
       restTimer!.cancel();
     } catch (Exception) {
@@ -133,7 +134,10 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       // ending, if THE ******* USER TAPED THE NEXT BUTTON RIGHT AT THE END OF
       // REST TIME).
     }
+  }
 
+  void goStraightToNext() {
+    _cancelRestTimer();
     _imageService.stop();
     exerciseTracker.next().then((value) => {startExerciseForCurrent()});
   }
@@ -246,7 +250,12 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   }
 
   /// Goes back to the previous exercise.
-  previousButtonPressed() {}
+  previousButtonPressed() {
+    audioPlayer.stop();
+    _imageService.stop();
+    _cancelRestTimer();
+    exerciseTracker.previous().then((value) => {startExerciseForCurrent()});
+  }
 
   /// Emit the current exercise state.
   ///
