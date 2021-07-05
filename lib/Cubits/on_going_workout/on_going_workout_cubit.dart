@@ -174,9 +174,6 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   ///
   /// Reset the rep value.
   startSetForCurrentExercise() async {
-    final name = current.name;
-    final sets = current.sets;
-    final reps = current.reps;
     final length = current.length;
     currentRepCount = 1;
 

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter/material.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
 
 /// Responsible for the displaying of the correct images in an exercise.

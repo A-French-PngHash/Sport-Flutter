@@ -1,14 +1,12 @@
 import 'dart:ffi';
 
 import 'package:sport/Data/Model/exercise/exercise.dart';
-import 'package:sport/Data/Model/workout/workout.dart';
 import 'package:sport/Data/exercise_repository.dart';
 
 /// Keeps track of the current exercise.
 class ExerciseTracker {
   int _exerciseIndex = 0;
   ExerciseRepository _exerciseRepository;
-  Workout _workout;
 
   late Exercise current;
 
@@ -21,11 +19,11 @@ class ExerciseTracker {
   }
 
   /// Private factory. Initialize code goes here.
-  ExerciseTracker._create(this._exerciseRepository, this._workout);
+  ExerciseTracker._create(this._exerciseRepository);
 
   /// Public factory
   static Future<ExerciseTracker> create(_exerciseRepository, _workout) async {
-    var component = ExerciseTracker._create(_exerciseRepository, _workout);
+    var component = ExerciseTracker._create(_exerciseRepository);
     // Exercises gets shuffled here :
     component._exList = (await component._exerciseRepository.exerciseList(_workout))..shuffle();
     component._exList.insert(0, Exercise("Zottman Curls", 4, 3, length: 20));

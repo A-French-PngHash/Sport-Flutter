@@ -21,17 +21,6 @@ class SportAudioPlayer {
         });
   }
 
-  _play(List<String> paths, Function finished) async {
-    final audioSources = paths.map((e) => Audio(e)).toList();
-    await audioPlayer.open(Playlist(audios: audioSources));
-
-    audioPlayer.playlistFinished.listen((f) {
-      if (f) {
-        finished();
-      }
-    });
-  }
-
   /// Anounce the given exercise.
   ///
   /// This anouncment is done before each exercise, one time.
