@@ -58,6 +58,7 @@ flutter:
   assets:
     - assets/exercises.json
     - assets/workouts.json
+    - assets/images/Abs/
     - assets/images/Arms/Superman/
     - assets/images/Arms/Hammer Curls/
     - assets/images/Arms/Arm Circle/

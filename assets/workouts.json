@@ -5,12 +5,17 @@
             "exercises": [
                 {
                     "name": "Zottman Curls",
-                    "length": 5,
-                    "sets": 3
+                    "reps": 333,
+                    "sets": 2
                 },
                 {
                     "name": "Zottman Curls",
-                    "reps": 8,
+                    "reps": 222,
+                    "sets": 2
+                },
+                {
+                    "name": "Zottman Curls",
+                    "reps": 111,
                     "sets": 2
                 }
             ],
@@ -45,6 +50,78 @@
             ],
             "restTime": 8,
             "workoutType": "arm"
+        },
+        {
+            "name": "Abs",
+            "exercises": [
+                {
+                    "name": "Chair Situps",
+                    "reps": 10,
+                    "sets": 2
+                },
+                {
+                    "name": "V Ups",
+                    "reps": 20,
+                    "sets": 1
+                },
+                {
+                    "name": "Toe Touches",
+                    "reps": 20,
+                    "sets": 1
+                },
+                {
+                    "name": "Crucifixes",
+                    "reps": 20,
+                    "sets": 1
+                },
+                {
+                    "name": "Russian Twist",
+                    "reps": 15,
+                    "sets": 2
+                },
+                {
+                    "name": "Heel Touch",
+                    "reps": 20,
+                    "sets": 1
+                },
+                {
+                    "name": "Plank Knees To Elbow",
+                    "reps": 10,
+                    "sets": 1
+                },
+                {
+                    "name": "Mountain Climber",
+                    "reps": 20,
+                    "sets": 1
+                },
+                {
+                    "name": "Laying Leg Raises",
+                    "reps": 15,
+                    "sets": 1
+                },
+                {
+                    "name": "Laying Knee Raises",
+                    "reps": 15,
+                    "sets": 1
+                },
+                {
+                    "name": "Laying Circle",
+                    "reps": 15,
+                    "sets": 2
+                },
+                {
+                    "name": "Dead Bug",
+                    "reps": 20,
+                    "sets": 1
+                },
+                {
+                    "name": "Side Bend",
+                    "reps": 20,
+                    "sets": 2
+                }
+            ],
+            "restTime" : 8,
+            "workoutType" : "arm"
         }
     ]
 }

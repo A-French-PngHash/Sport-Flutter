@@ -11,5 +11,44 @@
     },
     "Zottman Curls": {
         "imagesCount": 4
+    },
+    "Toe Touches" : {
+        "imagesCount" : 2,
+        "repetitionLength" : 1.5
+    },
+    "V Ups" : {
+        "imagesCount" : 2
+    },
+    "Russian Twist" : {
+        "imagesCount" : 3
+    },
+    "Heel Touch" : {
+        "imagesCount" : 4,
+        "repetitionLength" : 3.1
+    },
+    "Plank Knees To Elbow" : {
+        "imagesCount" : 4,
+        "repetitionLength" : 2.6
+    },
+    "Mountain Climber" : {
+        "imagesCount" : 9,
+        "repetitionLength" : 1.6
+    },
+    "Laying Leg Raises" : {
+        "imagesCount" : 2
+    },
+    "Laying Knee Raises" : {
+        "imagesCount" : 2
+    },
+    "Laying Circle" : {
+        "imagesCount" : 3,
+        "repetitionLength" : 1.65
+    },
+    "Dead Bug" :{
+        "imagesCount" : 4,
+        "repetitionLength" : 2.9
+    },
+    "Side Bend" : {
+        "imagesCount" : 2
     }
 }
