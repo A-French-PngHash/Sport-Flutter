@@ -23,7 +23,6 @@ class ExerciseNavigation extends StatelessWidget {
   }
 
   nextButtonPressed(BuildContext context) {
-    print("next");
     final cubit = context.read<OnGoingWorkoutCubit>();
     cubit.nextButtonPressed();
   }

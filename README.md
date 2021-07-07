@@ -77,4 +77,4 @@ Either (length) *or* (repetitions) must be provided.
 
 You can learn more about the code in the following files : 
 
-    - [services.md](services.md) : Describe the different local services used in the app.
+- [services](services.md) : Describe the different local services used in the app.

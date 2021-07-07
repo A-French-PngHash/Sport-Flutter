@@ -68,7 +68,6 @@ class ImageService {
   String _urlFor(int image_index, {Exercise? exercise}) {
     exercise = exercise == null ? currentExercise : exercise;
     final key = exercise!.name + " " + image_index.toString();
-    print(imagePathMap.keys);
     if (imagePathMap.containsKey(key) != true) {
       throw Exception("No image in the pathMap for the exercise ${exercise.name} at the image index $image_index");
     }

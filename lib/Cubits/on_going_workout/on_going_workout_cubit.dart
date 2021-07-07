@@ -41,6 +41,10 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
 
   Timer? restTimer;
 
+  /// Whether the rest time has begun. This includes the anouncment time of the
+  /// rest.
+  bool restBegan = false;
+
   Exercise get current {
     return exerciseTracker.current;
   }
@@ -100,6 +104,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       audioPlayer.anounceEndOfWorkout();
       return;
     }
+    restBegan = true;
     await audioPlayer.anounceEndOfExercise(current, _workout.restTime);
 
     currentRestStartedAt = DateTime.now().millisecondsSinceEpoch;
@@ -111,6 +116,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     restTimer = Timer.periodic(Duration(milliseconds: 100), (timer) {
       if (restSecondLeft! <= 0) {
         // Rest ended.
+        restBegan = false;
         exerciseTracker.next().then((value) {
           // Goes to the next exercise.
           startExerciseForCurrent();
@@ -124,6 +130,8 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
 
   /// Cancels the rest timer.
   void _cancelRestTimer() {
+    currentRestStartedAt = null;
+    restBegan = false;
     try {
       restTimer!.cancel();
     } catch (Exception) {
@@ -191,7 +199,6 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
 
     currentSetStartedAt = DateTime.now().millisecondsSinceEpoch;
     _imageService.startFor(current, (imageUrl) {
-      print("changed image");
       emitCurrent(imageUrl: imageUrl);
     });
     if (length != null) {
@@ -237,7 +244,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       exerciseSetTimer!.cancel();
       exerciseSetTimer = null;
     }
-    if (current.reps != null && current.repetitionLength == null && currentRestStartedAt == null) {
+    if (current.reps != null && current.repetitionLength == null && restBegan != true) {
       // Starts rest time.
       audioPlayer.stop();
       finishedExercise();
@@ -254,6 +261,10 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     audioPlayer.stop();
     _imageService.stop();
     _cancelRestTimer();
+    if (exerciseSetTimer != null) {
+      exerciseSetTimer!.cancel();
+      exerciseSetTimer = null;
+    }
     exerciseTracker.previous().then((value) => {startExerciseForCurrent()});
   }
 
