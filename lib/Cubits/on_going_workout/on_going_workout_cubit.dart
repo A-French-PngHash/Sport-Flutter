@@ -56,7 +56,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     if (currentSetStartedAt != null && current.length != null) {
       return (current.length! - ((DateTime.now().millisecondsSinceEpoch - currentSetStartedAt!) / 1000)).ceil();
     } else if (current.reps == null) {
-      // The exercise is of type length but the currentRestStartedAt hasnt been set. In this case, the user is at the begining of the exercise.
+      // The exercise is of type length but the currentSetStartedAt hasnt been set. In this case, the user is at the begining of the exercise.
       return current.length;
     }
   }
@@ -244,6 +244,8 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       exerciseSetTimer!.cancel();
       exerciseSetTimer = null;
     }
+    currentSetStartedAt = null;
+
     if (current.reps != null && current.repetitionLength == null && restBegan != true) {
       // Starts rest time.
       audioPlayer.stop();
@@ -258,6 +260,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
 
   /// Goes back to the previous exercise.
   previousButtonPressed() {
+    currentSetStartedAt = null;
     audioPlayer.stop();
     _imageService.stop();
     _cancelRestTimer();

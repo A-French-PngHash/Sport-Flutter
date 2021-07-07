@@ -1,57 +1,6 @@
 {
     "workouts": [
         {
-            "name": "Zottman test",
-            "exercises": [
-                {
-                    "name": "Zottman Curls",
-                    "reps": 333,
-                    "sets": 2
-                },
-                {
-                    "name": "Zottman Curls",
-                    "reps": 222,
-                    "sets": 2
-                },
-                {
-                    "name": "Zottman Curls",
-                    "reps": 111,
-                    "sets": 2
-                }
-            ],
-            "restTime": 12,
-            "workoutType": "arm"
-        },
-        {
-            "name": "Test",
-            "exercises": [
-                {
-                    "name": "Bear Crawl",
-                    "length": 30,
-                    "sets": 1
-                }
-            ],
-            "restTime": 8,
-            "workoutType": "arm"
-        },
-        {
-            "name": "Test 2",
-            "exercises": [
-                {
-                    "name": "Bear Crawl",
-                    "reps": 60,
-                    "sets": 1
-                },
-                {
-                    "name": "Chair Situps",
-                    "reps": 30,
-                    "sets": 1
-                }
-            ],
-            "restTime": 8,
-            "workoutType": "arm"
-        },
-        {
             "name": "Abs",
             "exercises": [
                 {
@@ -120,8 +69,144 @@
                     "sets": 2
                 }
             ],
-            "restTime" : 8,
-            "workoutType" : "arm"
+            "restTime": 8,
+            "workoutType": "arm"
+        },
+        {
+            "name": "Lower Body",
+            "restTime": 10,
+            "workoutType": "lowerBody",
+            "exercises": [
+                {
+                    "name": "Squat",
+                    "reps": 20,
+                    "sets": 2
+                },
+                {
+                    "name": "Leg Flutters",
+                    "reps": 30,
+                    "sets": 1
+                },
+                {
+                    "name": "Bridge",
+                    "reps": 15,
+                    "sets": 1
+                },
+                {
+                    "name": "Single Leg Bridge",
+                    "reps": 10,
+                    "sets": 2
+                },
+                {
+                    "name": "Lunges",
+                    "length": 60,
+                    "sets": 1
+                },
+                {
+                    "name": "Crab Walk",
+                    "length": 60,
+                    "sets": 1
+                },
+                {
+                    "name": "Gluteus Kickback",
+                    "length": 40,
+                    "sets": 2
+                },
+                {
+                    "name": "Kneeling Squat",
+                    "length": 60,
+                    "sets": 1
+                },
+                {
+                    "name": "Pulsing Squat",
+                    "reps": 60,
+                    "sets": 1
+                },
+                {
+                    "name": "Side Lying Abduction",
+                    "length": 45,
+                    "sets": 2
+                },
+                {
+                    "name": "Squat Hold Abduction",
+                    "length": 35,
+                    "sets": 1
+                }
+            ]
+        },
+        {
+            "name": "Biceps Upper Body",
+            "restTime": 17,
+            "workoutType": "upperBody",
+            "exercises" : [
+                {
+                    "name" : "Plank",
+                    "length" : 60,
+                    "sets" : 1
+                },
+                {
+                    "name" : "Bear Crawl",
+                    "length" : 40,
+                    "sets" : 1
+                },
+                {
+                    "name" : "Hammer Curls",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Pronated Curls",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Rear Delt Flies",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Supinated Biceps Curls",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Zottman Curls",
+                    "reps" : 10,
+                    "sets" : 3
+                }
+            ]
+        },
+        {
+            "name" : "Triceps Upper Body",
+            "restTime" : 17,
+            "workoutType" : "upperBody",
+            "exercises" : [
+                {
+                    "name" : "Overhead Triceps Extension",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Dips",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Triceps Kickback",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Bench Press",
+                    "reps" : 10,
+                    "sets" : 3
+                },
+                {
+                    "name" : "Bench Press Alternating",
+                    "reps" : 10,
+                    "sets" : 3
+                }
+            ]
         }
     ]
 }
