@@ -1,7 +1,4 @@
 {
-    "Bear Crawl": {
-        "imagesCount": 2
-    },
     "Chair Situps": {
         "imagesCount": 2,
         "repetitionLength": 1.5
@@ -51,5 +48,76 @@
     "Side Bend" : {
         "imagesCount" : 2
     },
-    ""
+    "Squat" : {
+        "imagesCount" : 2
+    },
+    "Leg Flutters" : {
+        "imagesCount" : 4,
+        "repetitionLength" : 1
+    },
+    "Bridge" : {
+        "imagesCount" : 2,
+        "repetitionLength" : 4
+    },
+    "Single Leg Bridge" :{
+        "imagesCount" : 2,
+        "repetitionLength" : 4
+    },
+    "Lunges" :{
+        "imagesCount" : 4
+    },
+    "Crab Walk" :{
+        "imagesCount" : 4
+    },
+    "Gluteus Kickback" :{
+        "imagesCount" : 2
+    },
+    "Kneeling Squat" :{
+        "imagesCount" : 2
+    },
+    "Pulsing Squat" :{
+        "imagesCount" : 4
+    },
+    "Side Lying Abduction" :{
+        "imagesCount" : 2
+    },
+    "Squat Hold Abduction" :{
+        "imagesCount" : 2
+    },
+    "Bridge Walkout" :{
+        "imagesCount" : 3
+    },
+    "Overhead Triceps Extension" :{
+        "imagesCount" : 2
+    },
+    "Triceps Kickback" :{
+        "imagesCount" : 2
+    },
+    "Dips" :{
+        "imagesCount" : 2
+    },
+    "Bench Press" :{
+        "imagesCount" : 2
+    },
+    "Bench Press Alternating" :{
+        "imagesCount" : 4 
+    },
+    "Plank" :{
+        "imagesCount" : 1
+    },
+    "Bear Crawl" :{
+        "imagesCount" : 11
+    },
+    "Hammer Curls" :{
+        "imagesCount" : 2
+    },
+    "Pronated Curls" :{
+        "imagesCount" : 2
+    },
+    "Rear Delt Flies" :{
+        "imagesCount" : 2
+    },
+    "Supinated Biceps Curls" : {
+        "imagesCount" : 2
+    }
 }
