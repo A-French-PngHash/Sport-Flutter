@@ -11,8 +11,7 @@ It also has methods like `stop` (to basically, stop the `startFor` loop). And `f
 
 ## ExerciseTracker
 Another useful service to keep track of the current exercise and switch between them. It is found at [exercise_tracker.dart](lib/Cubits/on_going_workout/exercise_tracker.dart). This `ExerciseTracker` communicates with the local repositories ([exercise_repository.dart](lib/Data/exercise_repository.dart)) to fetch exercises. It has a method `next` to load the next exercise, and an `isLast` property which says whether the current exercise is the last for the workout being done. 
-It currently doesn't have a `previous` method, but it won't stay like that for too long 👀.
-
+The `previous` method switches back to the previous exercise.
 *Note* : This service is also responsible for shuffling the exercise list (which is shuffles every time a workout begin).
 
 ## SportAudioPlayer
