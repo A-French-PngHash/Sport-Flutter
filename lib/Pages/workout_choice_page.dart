@@ -40,7 +40,7 @@ class WorkoutChoicePage extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (_) {
       return BlocProvider(
         create: (context) => OnGoingWorkoutCubit(workoutChosen, ExerciseRepository()),
-        child: OnGoingWorkoutPage(workoutChosen.name),
+        child: OnGoingWorkoutPage(workoutChosen.name, workoutChosen.exercises.length),
       );
     }));
   }

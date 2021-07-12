@@ -110,7 +110,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     currentRestStartedAt = DateTime.now().millisecondsSinceEpoch;
 
     // Emiting rest state.
-    emit(OnGoingWorkoutState.Rest(_workout.restTime));
+    emit(OnGoingWorkoutState.Rest(_workout.restTime, exerciseTracker.exerciseIndex));
 
     // Rest timer.
     restTimer = Timer.periodic(Duration(milliseconds: 100), (timer) {
@@ -124,7 +124,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
           restTimer = null;
         });
       }
-      emit(OnGoingWorkoutState.Rest(restSecondLeft!));
+      emit(OnGoingWorkoutState.Rest(restSecondLeft!, exerciseTracker.exerciseIndex));
     });
   }
 
@@ -291,7 +291,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       // No image provided. Will get the first exercise for the current exercise.
       image = _imageService.firstImageFor(current);
     }
-    emit(OnGoingWorkoutState.ExerciseInProgress(image, currentSetCount, current.sets,
+    emit(OnGoingWorkoutState.ExerciseInProgress(exerciseTracker.exerciseIndex, image, currentSetCount, current.sets,
         repCount: current.reps, secondsLeft: secondsLeft));
   }
 }

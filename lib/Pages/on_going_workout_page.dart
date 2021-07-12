@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport/Cubits/on_going_workout/on_going_workout_cubit.dart';
+import 'package:sport/Pages/Utility/progress_bar.dart';
 import 'package:sport/Pages/exercise_navigation.dart';
 
 class OnGoingWorkoutPage extends StatelessWidget {
   /// Name used to display a title.
   final String _workoutName;
 
-  OnGoingWorkoutPage(this._workoutName) {}
+  /// Exercise count for this workout.
+  final int _exerciseCount;
+
+  late final double screenWidth;
+
+  OnGoingWorkoutPage(this._workoutName, this._exerciseCount) {}
 
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text("$_workoutName"),
@@ -22,7 +29,7 @@ class OnGoingWorkoutPage extends StatelessWidget {
           },
         ),
       ),
-      body: BlocBuilder<OnGoingWorkoutCubit, OnGoingWorkoutState>(
+      body: BlocConsumer<OnGoingWorkoutCubit, OnGoingWorkoutState>(
         builder: (context, state) {
           return state.when(
             initial: () {
@@ -32,14 +39,20 @@ class OnGoingWorkoutPage extends StatelessWidget {
             ExerciseInProgress: buildExerciseInProgress,
           );
         },
+        listener: (context, state) {},
       ),
     );
   }
 
-  Widget buildExerciseInProgress(String imageUrl, int setCount, int currentSet, int? repCount, int? secondsRemaining) {
+  Widget buildExerciseInProgress(
+      int currentExerciseIndex, String imageUrl, int setCount, int currentSet, int? repCount, int? secondsRemaining) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: SegmentedProgressBar(_exerciseCount, currentExerciseIndex, screenWidth - 40),
+        ),
         Text(
           secondsRemaining != null ? secondsRemaining.toString() : repCount.toString(),
           style: TextStyle(fontSize: 30),
@@ -58,10 +71,14 @@ class OnGoingWorkoutPage extends StatelessWidget {
     );
   }
 
-  Widget buildRest(int secondLeft) {
+  Widget buildRest(int secondLeft, int currentExerciseIndex) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: SegmentedProgressBar(_exerciseCount, currentExerciseIndex, screenWidth - 40),
+        ),
         Spacer(),
         Text(
           formatTime(secondLeft),

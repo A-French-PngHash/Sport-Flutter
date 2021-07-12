@@ -5,7 +5,7 @@ import 'package:sport/Data/exercise_repository.dart';
 
 /// Keeps track of the current exercise.
 class ExerciseTracker {
-  int _exerciseIndex = 0;
+  int exerciseIndex = 0;
   ExerciseRepository _exerciseRepository;
 
   late Exercise current;
@@ -15,7 +15,7 @@ class ExerciseTracker {
 
   /// Load current exercise asynchronously.
   Future<void> _loadCurrent() async {
-    current = _exList[_exerciseIndex];
+    current = _exList[exerciseIndex];
   }
 
   /// Private factory. Initialize code goes here.
@@ -32,19 +32,19 @@ class ExerciseTracker {
 
   /// Whether the current exercise is the last.
   bool get isLast {
-    return (_exerciseIndex >= _exList.length - 1);
+    return (exerciseIndex >= _exList.length - 1);
   }
 
   /// Whethere the current exercise is the first.
   bool get isFirst {
-    return _exerciseIndex == 0;
+    return exerciseIndex == 0;
   }
 
   /// Go to the next exercise.
   Future<Void?> next() async {
     if (!isLast) {
       // Can go to the next one.
-      _exerciseIndex += 1;
+      exerciseIndex += 1;
       await _loadCurrent();
     }
   }
@@ -52,7 +52,7 @@ class ExerciseTracker {
   Future previous() async {
     if (!isFirst) {
       // Can go to the previous one.
-      _exerciseIndex -= 1;
+      exerciseIndex -= 1;
       await _loadCurrent();
     }
   }
