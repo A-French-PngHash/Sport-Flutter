@@ -95,3 +95,8 @@ flutter:
     - assets/images/Triceps/Bench Press/
     - assets/images/Triceps/Overhead Triceps Extension/
     - assets/images/Triceps/Close Triceps Extension/
+
+  fonts:
+    - family: Oswald
+      fonts:
+        - asset: assets/fonts/Oswald-Medium.ttf

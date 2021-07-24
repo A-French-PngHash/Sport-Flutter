@@ -102,6 +102,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     _imageService.stop();
     if (exerciseTracker.isLast) {
       audioPlayer.anounceEndOfWorkout();
+      emitCurrent();
       return;
     }
     restBegan = true;
@@ -291,7 +292,8 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
       // No image provided. Will get the first exercise for the current exercise.
       image = _imageService.firstImageFor(current);
     }
-    emit(OnGoingWorkoutState.ExerciseInProgress(exerciseTracker.exerciseIndex, image, currentSetCount, current.sets,
+    emit(OnGoingWorkoutState.ExerciseInProgress(
+        exerciseTracker.exerciseIndex, image, exerciseTracker.current.name, currentSetCount, current.sets,
         repCount: current.reps, secondsLeft: secondsLeft));
   }
 }

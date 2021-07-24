@@ -14,7 +14,7 @@ class WorkoutChoicePage extends StatelessWidget {
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
           "Pick a workout",
-          style: TextStyle(fontSize: 40),
+          style: TextStyle(fontSize: 40, color: Colors.white),
         ),
         BlocConsumer<WorkoutChoiceCubit, WorkoutChoiceState>(
           builder: (context, state) {

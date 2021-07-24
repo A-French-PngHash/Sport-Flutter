@@ -7,19 +7,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ExerciseNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      TextButton(
-          child: Icon(Icons.arrow_left_rounded, size: 100),
-          onPressed: () {
-            previousButtonPressed(context);
-          }),
-      TextButton(
-        child: Icon(Icons.arrow_right_rounded, size: 100),
-        onPressed: () {
-          nextButtonPressed(context);
-        },
-      ),
-    ]);
+    return LayoutBuilder(
+      builder: (context, constrainst) {
+        return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          TextButton(
+            child: Icon(
+              Icons.arrow_left_rounded,
+              size: constrainst.biggest.width / 4,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              previousButtonPressed(context);
+            },
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Icon(Icons.pause_circle, size: constrainst.biggest.width / 4, color: Color(0xFF198C45),),
+          ),
+          TextButton(
+            child: Icon(Icons.arrow_right_rounded, size: constrainst.biggest.width / 4, color: Colors.white),
+            onPressed: () {
+              nextButtonPressed(context);
+            },
+          ),
+        ]);
+      },
+    );
   }
 
   nextButtonPressed(BuildContext context) {
@@ -30,5 +43,9 @@ class ExerciseNavigation extends StatelessWidget {
   previousButtonPressed(BuildContext context) {
     final cubit = context.read<OnGoingWorkoutCubit>();
     cubit.previousButtonPressed();
+  }
+
+  pauseButtonPressed(BuildContext context) {
+    //TODO: - Pause workout.
   }
 }

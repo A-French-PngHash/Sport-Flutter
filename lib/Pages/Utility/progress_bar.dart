@@ -44,7 +44,7 @@ class SegmentedProgressBar extends StatelessWidget {
                 width: individualWidth,
                 decoration: BoxDecoration(
                   color: Colors.amber,
-                  borderRadius: currentSegment == 1 ? null : BorderRadius.horizontal(left: Radius.circular(10)),
+                  borderRadius: currentSegment == 0 ? BorderRadius.horizontal(left: Radius.circular(10)) : null,
                 ),
               ),
             ),

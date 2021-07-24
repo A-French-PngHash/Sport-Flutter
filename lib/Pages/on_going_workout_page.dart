@@ -44,18 +44,14 @@ class OnGoingWorkoutPage extends StatelessWidget {
     );
   }
 
-  Widget buildExerciseInProgress(
-      int currentExerciseIndex, String imageUrl, int setCount, int currentSet, int? repCount, int? secondsRemaining) {
+  Widget buildExerciseInProgress(int currentExerciseIndex, String imageUrl, String exerciseName, int setCount,
+      int currentSet, int? repCount, int? secondsRemaining) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: SegmentedProgressBar(_exerciseCount, currentExerciseIndex, screenWidth - 40),
-        ),
-        Text(
-          secondsRemaining != null ? secondsRemaining.toString() : repCount.toString(),
-          style: TextStyle(fontSize: 30),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -66,6 +62,14 @@ class OnGoingWorkoutPage extends StatelessWidget {
           imageUrl,
           gaplessPlayback: true,
         )),
+        Text(
+          exerciseName.toUpperCase(),
+          style: TextStyle(fontSize: 20),
+        ),
+        Text(
+          secondsRemaining != null ? formatTime(secondsRemaining) : repCount.toString(),
+          style: TextStyle(fontSize: 30, color: Colors.green),
+        ),
         ExerciseNavigation(),
       ],
     );
@@ -82,7 +86,7 @@ class OnGoingWorkoutPage extends StatelessWidget {
         Spacer(),
         Text(
           formatTime(secondLeft),
-          style: TextStyle(color: Color(0xFF30302E), fontWeight: FontWeight.bold, fontSize: 40),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
         ),
         Spacer(),
         ExerciseNavigation(),
