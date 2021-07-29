@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'dart:math';
-import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
