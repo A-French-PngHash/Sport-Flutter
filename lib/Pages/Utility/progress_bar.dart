@@ -25,6 +25,7 @@ class SegmentedProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final grey_part_width = fullWidth - (individualWidth * (currentSegment + 1));
     return Container(
       child: Container(
         height: this.progressBarHeight,
@@ -44,12 +45,12 @@ class SegmentedProgressBar extends StatelessWidget {
                 width: individualWidth,
                 decoration: BoxDecoration(
                   color: Colors.amber,
-                  borderRadius: currentSegment == 0 ? BorderRadius.horizontal(left: Radius.circular(10)) : null,
+                  borderRadius: currentSegment == 0 ? BorderRadius.horizontal(left: Radius.circular(10)) : grey_part_width == 0 ? BorderRadius.horizontal(right: Radius.circular(10)) : null,
                 ),
               ),
             ),
             Container(
-              width: fullWidth - (individualWidth * (currentSegment + 1)),
+              width: grey_part_width,
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
