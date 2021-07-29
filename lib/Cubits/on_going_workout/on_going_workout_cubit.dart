@@ -7,7 +7,7 @@ import 'package:sport/Services/image_service.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
 import 'package:sport/Data/Model/workout/workout.dart';
 import 'package:sport/Data/exercise_repository.dart';
-import 'package:pausable_timer/pausable_timer.dart';
+import '../Utility/periodic_pausable_timer.dart';
 
 import '../Services/exercise_tracker.dart';
 
@@ -38,9 +38,9 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   /// finishes (which can be triggered automatically eg. reached the end of the
   /// time, or by the user, eg. the user pressed the 'next exercise button') so
   /// we need to keep a reference to it.
-  PausableTimer? exerciseSetTimer;
+  PeriodicPausableTimer? exerciseSetTimer;
 
-  PausableTimer? restTimer;
+  PeriodicPausableTimer? restTimer;
 
   /// Whether the rest time has begun. This includes the anouncment time of the
   /// rest.
@@ -122,7 +122,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     emitCurrent(restLeft: _workout.restTime);
 
     // Rest timer.
-    restTimer = PausableTimer(Duration(milliseconds: 100), () {
+    restTimer = PeriodicPausableTimer(Duration(milliseconds: 100), () {
       restTimer!
         ..reset()
         ..start();
@@ -137,14 +137,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
         restTimer!.cancel(); // Cancel the timer (to prevent executing this code another time)
       }
       emitCurrent();
-    });
-    restTimer!.start();
-    if (isPaused) {
-      // This is a special case. If the user paused while an announcment 
-      // period, the timer was not yet started. It is however starting now 
-      // that the announcment ended. 
-      restTimer!.pause();
-    }
+    }, isPaused);
   }
 
   /// Cancels the rest timer.
@@ -225,7 +218,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     });
     if (length != null) {
       // Length type exercise.
-      exerciseSetTimer = PausableTimer(Duration(milliseconds: 100), () {
+      exerciseSetTimer = PeriodicPausableTimer(Duration(milliseconds: 100), () {
         if (secondsLeft! <= 0) {
           // The set ends now.
           exerciseSetTimer!.cancel();
@@ -237,18 +230,11 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
         exerciseSetTimer!
           ..reset()
           ..start();
-      });
-      exerciseSetTimer!.start();
-      if (isPaused) {
-        // This is a special case. If the user paused while an announcment 
-        // period, the timer was not yet started. It is however starting now 
-        // that the announcment ended. 
-        exerciseSetTimer!.pause();
-      }
+      }, isPaused);
     } else {
       if (current.repetitionLength != null) {
         // The app needs to say each rep.
-        exerciseSetTimer = PausableTimer(Duration(milliseconds: (current.repetitionLength! * 1000).floor()), () async {
+        exerciseSetTimer = PeriodicPausableTimer(Duration(milliseconds: (current.repetitionLength! * 1000).floor()), () async {
           exerciseSetTimer!
             ..reset()
             ..start();
@@ -261,14 +247,7 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
             exerciseSetTimer = null;
             finishedSet();
           }
-        });
-        exerciseSetTimer!.start();
-        if (isPaused) {
-          // This is a special case. If the user paused while an announcment 
-          // period, the timer was not yet started. It is however starting now 
-          // that the announcment ended. 
-          exerciseSetTimer!.pause();
-        }
+        }, isPaused);
       }
     }
   }

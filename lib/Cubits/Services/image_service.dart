@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:pausable_timer/pausable_timer.dart';
+import '../Utility/periodic_pausable_timer.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
 
 /// Responsible for the displaying of the correct images in an exercise.
@@ -13,7 +13,7 @@ class ImageService {
   /// Whether the current workout is paused.
   bool isPaused = false;
 
-  PausableTimer? currentTimer;
+  PeriodicPausableTimer? currentTimer;
   Map<String, String> imagePathMap;
 
   ImageService._create(this.imagePathMap);
@@ -35,7 +35,7 @@ class ImageService {
       imageDisplayTime = exercise.repetitionLength! / exercise.imagesCount;
     }
     currentExercise = exercise;
-    currentTimer = PausableTimer(Duration(milliseconds: (imageDisplayTime * 1000).floor()), () {
+    currentTimer = PeriodicPausableTimer(Duration(milliseconds: (imageDisplayTime * 1000).floor()), () {
       currentTimer!
         ..reset()
         ..start();
@@ -45,14 +45,7 @@ class ImageService {
         currentImageIndex = 1;
       }
       imageChanged(currentImage);
-    });
-    currentTimer!.start();
-    if (isPaused) {
-      // This is a special case. If the user paused while an announcment
-      // period, the timer was not yet started. It is however starting now
-      // that the announcment ended.
-      currentTimer!.pause();
-    }
+    }, isPaused);
   }
 
   /// Return the current image.
