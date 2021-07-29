@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// Responsible for the displaying of the arrows. Those widgets allow the manual
 /// navigation from the user in the different exercise.
 class ExerciseNavigation extends StatelessWidget {
+  bool paused;
+  ExerciseNavigation(this.paused);
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -21,8 +24,14 @@ class ExerciseNavigation extends StatelessWidget {
             },
           ),
           TextButton(
-            onPressed: () {},
-            child: Icon(Icons.pause_circle, size: constrainst.biggest.width / 4, color: Color(0xFF198C45),),
+            onPressed: () {
+              pauseButtonPressed(context);
+            },
+            child: Icon(
+              paused ? Icons.play_circle : Icons.pause_circle,
+              size: constrainst.biggest.width / 4,
+              color: Color(0xFF198C45),
+            ),
           ),
           TextButton(
             child: Icon(Icons.arrow_right_rounded, size: constrainst.biggest.width / 4, color: Colors.white),
@@ -46,6 +55,7 @@ class ExerciseNavigation extends StatelessWidget {
   }
 
   pauseButtonPressed(BuildContext context) {
-    //TODO: - Pause workout.
+    final cubit = context.read<OnGoingWorkoutCubit>();
+    cubit.pauseButtonPressed();
   }
 }

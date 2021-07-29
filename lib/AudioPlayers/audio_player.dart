@@ -1,12 +1,12 @@
+import 'dart:io';
 import 'dart:math';
+import 'package:path_provider/path_provider.dart';
 
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
 
 /// Plays audio anouncment.
 class SportAudioPlayer {
-  static AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
   static const String announcmentPath = "assets/Audio/Announcments";
   late final FlutterTts flutterTts;
   static const congratulationWords = ["Congratulation", "Awesome", "Amazing", "Unbelievable", "Demolition", "Carnage"];
@@ -70,7 +70,11 @@ class SportAudioPlayer {
     await flutterTts.speak(number.toString());
   }
 
-  /// Stops all anouncment currently playing.
+  speak(String texte) async {
+    await flutterTts.synthesizeToFile(texte, "temp.mp3");
+  }
+
+  /// Stops all announcments currently playing.
   stop() {
     flutterTts.stop();
   }

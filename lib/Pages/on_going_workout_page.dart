@@ -45,7 +45,7 @@ class OnGoingWorkoutPage extends StatelessWidget {
   }
 
   Widget buildExerciseInProgress(int currentExerciseIndex, String imageUrl, String exerciseName, int setCount,
-      int currentSet, int? repCount, int? secondsRemaining) {
+      int currentSet, bool paused, int? repCount, int? secondsRemaining) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -71,12 +71,12 @@ class OnGoingWorkoutPage extends StatelessWidget {
           secondsRemaining != null ? formatTime(secondsRemaining) : repCount.toString(),
           style: TextStyle(fontSize: 30, color: Colors.green),
         ),
-        ExerciseNavigation(),
+        ExerciseNavigation(paused),
       ],
     );
   }
 
-  Widget buildRest(int secondLeft, int currentExerciseIndex) {
+  Widget buildRest(int secondLeft, int currentExerciseIndex, bool paused) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -90,7 +90,7 @@ class OnGoingWorkoutPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
         ),
         Spacer(),
-        ExerciseNavigation(),
+        ExerciseNavigation(paused),
       ],
     );
   }

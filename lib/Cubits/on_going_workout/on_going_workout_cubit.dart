@@ -7,6 +7,7 @@ import 'package:sport/Cubits/on_going_workout/image_service.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
 import 'package:sport/Data/Model/workout/workout.dart';
 import 'package:sport/Data/exercise_repository.dart';
+import 'package:pausable_timer/pausable_timer.dart';
 
 import 'exercise_tracker.dart';
 
@@ -19,10 +20,10 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   late SportAudioPlayer audioPlayer;
   late ImageService _imageService;
 
-  /// Beginning of the current set. Unix timestamp.
+  /// Beginning of the current set. Unix timestamp in milliseconds.
   int? currentSetStartedAt;
 
-  /// Beginning of the current rest time. Unix timestamp.
+  /// Beginning of the current rest time. Unix timestamp in milliseconds.
   int? currentRestStartedAt;
 
   /// Current rep count. Correspond to the rep number being done by the user.
@@ -37,13 +38,19 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
   /// finishes (which can be triggered automatically eg. reached the end of the
   /// time, or by the user, eg. the user pressed the 'next exercise button') so
   /// we need to keep a reference to it.
-  Timer? exerciseSetTimer;
+  PausableTimer? exerciseSetTimer;
 
-  Timer? restTimer;
+  PausableTimer? restTimer;
 
   /// Whether the rest time has begun. This includes the anouncment time of the
   /// rest.
   bool restBegan = false;
+
+  /// Whether the workout is paused.
+  bool isPaused = false;
+
+  /// When the current pause started. Unix timestamp in miliseconds.
+  int? pauseStartedAt;
 
   Exercise get current {
     return exerciseTracker.current;
@@ -112,10 +119,13 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     currentRestStartedAt = DateTime.now().millisecondsSinceEpoch;
 
     // Emiting rest state.
-    emit(OnGoingWorkoutState.Rest(_workout.restTime, exerciseTracker.exerciseIndex));
+    emitCurrent(restLeft: _workout.restTime);
 
     // Rest timer.
-    restTimer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+    restTimer = PausableTimer(Duration(milliseconds: 100), () {
+      restTimer!
+        ..reset()
+        ..start();
       if (restSecondLeft! <= 0) {
         // Rest ended.
         restBegan = false;
@@ -124,10 +134,17 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
           startExerciseForCurrent();
           restTimer = null;
         });
-        timer.cancel(); // Cancel the timer (to prevent executing this code another time)
+        restTimer!.cancel(); // Cancel the timer (to prevent executing this code another time)
       }
-      emit(OnGoingWorkoutState.Rest(restSecondLeft!, exerciseTracker.exerciseIndex));
+      emitCurrent();
     });
+    restTimer!.start();
+    if (isPaused) {
+      // This is a special case. If the user paused while an announcment 
+      // period, the timer was not yet started. It is however starting now 
+      // that the announcment ended. 
+      restTimer!.pause();
+    }
   }
 
   /// Cancels the rest timer.
@@ -208,31 +225,50 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     });
     if (length != null) {
       // Length type exercise.
-      exerciseSetTimer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+      exerciseSetTimer = PausableTimer(Duration(milliseconds: 100), () {
         if (secondsLeft! <= 0) {
           // The set ends now.
-          timer.cancel();
+          exerciseSetTimer!.cancel();
           exerciseSetTimer = null;
           finishedSet();
         }
         print("emiting from timer");
         emitCurrent(imageUrl: _imageService.currentImage);
+        exerciseSetTimer!
+          ..reset()
+          ..start();
       });
+      exerciseSetTimer!.start();
+      if (isPaused) {
+        // This is a special case. If the user paused while an announcment 
+        // period, the timer was not yet started. It is however starting now 
+        // that the announcment ended. 
+        exerciseSetTimer!.pause();
+      }
     } else {
       if (current.repetitionLength != null) {
         // The app needs to say each rep.
-        exerciseSetTimer =
-            Timer.periodic(Duration(milliseconds: (current.repetitionLength! * 1000).floor()), (timer) async {
-          currentRepCount = currentRepCount! + 1; // This variable need to be set before announcing the number. Because in some cases, due to the asynchronity of the programm bugs may occur.        
+        exerciseSetTimer = PausableTimer(Duration(milliseconds: (current.repetitionLength! * 1000).floor()), () async {
+          exerciseSetTimer!
+            ..reset()
+            ..start();
+          currentRepCount = currentRepCount! +
+              1; // This variable need to be set before announcing the number. Because in some cases, due to the asynchronity of the programm bugs may occur.
           await audioPlayer.anounceNumber(currentRepCount!);
           if (currentRepCount! >= current.reps!) {
             // The set ends now.
-            timer.cancel();
+            exerciseSetTimer!.cancel();
             exerciseSetTimer = null;
             finishedSet();
           }
-
         });
+        exerciseSetTimer!.start();
+        if (isPaused) {
+          // This is a special case. If the user paused while an announcment 
+          // period, the timer was not yet started. It is however starting now 
+          // that the announcment ended. 
+          exerciseSetTimer!.pause();
+        }
       }
     }
   }
@@ -295,18 +331,65 @@ class OnGoingWorkoutCubit extends Cubit<OnGoingWorkoutState> {
     }
   }
 
+  /// The function thats gets called when the user presses the pause button.
+  ///
+  /// The pause button includes the actual pause button but the play button too
+  /// (which appear after the pause button was clicked once)
+  pauseButtonPressed() {
+    print("pause pressed");
+    if (isPaused) {
+      // Unpause
+      int pauseDuration = (DateTime.now().millisecondsSinceEpoch - pauseStartedAt!);
+      if (currentSetStartedAt != null) {
+        currentSetStartedAt = currentSetStartedAt! + pauseDuration;
+      }
+      if (currentRestStartedAt != null) {
+        currentRestStartedAt = currentRestStartedAt! + pauseDuration;
+      }
+      try {
+        restTimer!.start();
+      } on Error catch (_) {}
+      try {
+        exerciseSetTimer!.start();
+      } on Error catch (_) {}
+      _imageService.resume();
+      isPaused = false;
+      emitCurrent(imageUrl: _imageService.currentExercise == null ? null : _imageService.currentImage);
+    } else {
+      // Pause
+      try {
+        restTimer!.pause();
+      } on Error catch (_) {}
+      try {
+        exerciseSetTimer!.pause();
+      } on Error catch (_) {}
+      _imageService.pause();
+      pauseStartedAt = DateTime.now().millisecondsSinceEpoch;
+      isPaused = true;
+      emitCurrent(imageUrl: _imageService.currentExercise == null ? null : _imageService.currentImage);
+    }
+  }
+
   /// Emit the current exercise state.
   ///
   /// - imageUrl : Url of the image to display. Optional, if not provided then
   /// fetches the image url from the imageService by asking for the first image.
-  emitCurrent({String? imageUrl}) {
-    String? image = imageUrl;
-    if (image == null) {
-      // No image provided. Will get the first exercise for the current exercise.
-      image = _imageService.firstImageFor(current);
+  /// - restSecondsLeft : Number of seconds left for the rest. If not provided then
+  /// gets the number of seconds left from the [restSecondLeft] property.
+  emitCurrent({String? imageUrl, int? restLeft}) {
+    assert((restLeft != null) || (restLeft == null && restSecondLeft != null) || (restLeft == null && !restBegan));
+    if (restBegan) {
+      emit(OnGoingWorkoutState.Rest(
+          restLeft == null ? restSecondLeft! : restLeft, exerciseTracker.exerciseIndex, isPaused));
+    } else {
+      String? image = imageUrl;
+      if (image == null) {
+        // No image provided. Will get the first exercise for the current exercise.
+        image = _imageService.firstImageFor(current);
+      }
+      emit(OnGoingWorkoutState.ExerciseInProgress(
+          exerciseTracker.exerciseIndex, image, exerciseTracker.current.name, currentSetCount, current.sets, isPaused,
+          repCount: current.reps, secondsLeft: secondsLeft));
     }
-    emit(OnGoingWorkoutState.ExerciseInProgress(
-        exerciseTracker.exerciseIndex, image, exerciseTracker.current.name, currentSetCount, current.sets,
-        repCount: current.reps, secondsLeft: secondsLeft));
   }
 }
