@@ -1,5 +1,7 @@
 import 'package:pausable_timer/pausable_timer.dart';
 
+/// A Periodic [Timer] that can be paused, cancelled and resumed. Implemented on
+/// top of PausableTimer. 
 class PeriodicPausableTimer implements PausableTimer {
   late final PausableTimer timer;
 
