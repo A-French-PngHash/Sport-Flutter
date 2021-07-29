@@ -58,10 +58,11 @@ class OnGoingWorkoutPage extends StatelessWidget {
           children: [Text("$setCount/$currentSet")],
         ),
         Flexible(
-            child: Image.asset(
-          imageUrl,
-          gaplessPlayback: true,
-        )),
+          child: Image.asset(
+            imageUrl,
+            gaplessPlayback: true,
+          ),
+        ),
         Text(
           exerciseName.toUpperCase(),
           style: TextStyle(fontSize: 20),

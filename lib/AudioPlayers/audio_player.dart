@@ -50,9 +50,10 @@ class SportAudioPlayer {
   /// Is done at the end of each set if another one is coming up.
   ///
   /// - previousSet : The set count
-  anounceNextSet(Exercise exercise, int currentSet) async {
+  Future<void> anounceNextSet(Exercise exercise, int currentSet) async {
     await flutterTts
         .speak("Fantastic, Now prepare for the next set, set ${currentSet} of ${exercise.sets}, get ready, and");
+    print("end of next set announcment");
   }
 
   /// Anounce the end of the workout.
@@ -65,8 +66,8 @@ class SportAudioPlayer {
   /// Anounce the given number.
   ///
   /// Usually used to count the reps.
-  anounceNumber(int number) {
-    flutterTts.speak(number.toString());
+  anounceNumber(int number) async {
+    await flutterTts.speak(number.toString());
   }
 
   /// Stops all anouncment currently playing.

@@ -207,6 +207,28 @@
                     "sets" : 3
                 }
             ]
+        },
+        {
+            "name" : "test",
+            "restTime" : 5,
+            "workoutType" : "arm",
+            "exercises" : [
+                {
+                    "name" : "Chair Situps",
+                    "reps" : 3,
+                    "sets" : 2
+                },
+                {
+                    "name" : "Chair Situps",
+                    "reps" : 4,
+                    "sets" : 2
+                },
+                {
+                    "name" : "Chair Situps",
+                    "reps" : 5,
+                    "sets" : 2
+                }
+            ]
         }
     ]
 }
