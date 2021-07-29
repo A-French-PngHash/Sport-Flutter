@@ -2,14 +2,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sport/AudioPlayers/audio_player.dart';
-import 'package:sport/Cubits/on_going_workout/image_service.dart';
+import 'package:sport/Services/audio_player.dart';
+import 'package:sport/Services/image_service.dart';
 import 'package:sport/Data/Model/exercise/exercise.dart';
 import 'package:sport/Data/Model/workout/workout.dart';
 import 'package:sport/Data/exercise_repository.dart';
 import 'package:pausable_timer/pausable_timer.dart';
 
-import 'exercise_tracker.dart';
+import '../Services/exercise_tracker.dart';
 
 part 'on_going_workout_state.dart';
 part 'on_going_workout_cubit.freezed.dart';
