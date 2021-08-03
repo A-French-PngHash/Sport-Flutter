@@ -11,6 +11,8 @@ class SportAudioPlayer {
 
   SportAudioPlayer() {
     flutterTts = FlutterTts();
+    flutterTts
+        .setIosAudioCategory(IosTextToSpeechAudioCategory.ambient, [IosTextToSpeechAudioCategoryOptions.mixWithOthers]);
     flutterTts.awaitSpeakCompletion(true);
     flutterTts.setSpeechRate(0.56);
     flutterTts.setPitch(1);
