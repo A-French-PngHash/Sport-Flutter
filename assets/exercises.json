@@ -1,7 +1,6 @@
 {
     "Chair Situps": {
-        "imagesCount": 2,
-        "repetitionLength": 1.5
+        "imagesCount": 2
     },
     "Crucifixes": {
         "imagesCount": 2
@@ -9,115 +8,110 @@
     "Zottman Curls": {
         "imagesCount": 4
     },
-    "Toe Touches" : {
-        "imagesCount" : 2,
-        "repetitionLength" : 1.5
+    "Toe Touches": {
+        "imagesCount": 2
     },
-    "V Ups" : {
-        "imagesCount" : 2
+    "V Ups": {
+        "imagesCount": 2
     },
-    "Russian Twist" : {
-        "imagesCount" : 3
+    "Russian Twist": {
+        "imagesCount": 3
     },
-    "Heel Touch" : {
-        "imagesCount" : 4,
-        "repetitionLength" : 3.1
+    "Heel Touch": {
+        "imagesCount": 4
     },
-    "Plank Knees To Elbow" : {
-        "imagesCount" : 4,
-        "repetitionLength" : 2.6
+    "Plank Knees To Elbow": {
+        "imagesCount": 4
     },
-    "Mountain Climber" : {
-        "imagesCount" : 9,
-        "repetitionLength" : 1.6
+    "Mountain Climber": {
+        "imagesCount": 9
     },
-    "Laying Leg Raises" : {
-        "imagesCount" : 2
+    "Laying Leg Raises": {
+        "imagesCount": 2
     },
-    "Laying Knee Raises" : {
-        "imagesCount" : 2
+    "Laying Knee Raises": {
+        "imagesCount": 2
     },
-    "Laying Circle" : {
-        "imagesCount" : 3,
-        "repetitionLength" : 1.65
+    "Laying Circle": {
+        "imagesCount": 3
     },
-    "Dead Bug" :{
-        "imagesCount" : 4,
-        "repetitionLength" : 2.9
+    "Dead Bug": {
+        "imagesCount": 4,
+        "repetitionLength": 2.9
     },
-    "Side Bend" : {
-        "imagesCount" : 2
+    "Side Bend": {
+        "imagesCount": 2
     },
-    "Squat" : {
-        "imagesCount" : 2
+    "Squat": {
+        "imagesCount": 2
     },
-    "Leg Flutters" : {
-        "imagesCount" : 4,
-        "repetitionLength" : 1
+    "Leg Flutters": {
+        "imagesCount": 4,
+        "repetitionLength": 1
     },
-    "Bridge" : {
-        "imagesCount" : 2,
-        "repetitionLength" : 4
+    "Bridge": {
+        "imagesCount": 2,
+        "repetitionLength": 4
     },
-    "Single Leg Bridge" :{
-        "imagesCount" : 2,
-        "repetitionLength" : 4
+    "Single Leg Bridge": {
+        "imagesCount": 2,
+        "repetitionLength": 4
     },
-    "Lunges" :{
-        "imagesCount" : 4
+    "Lunges": {
+        "imagesCount": 4
     },
-    "Crab Walk" :{
-        "imagesCount" : 4
+    "Crab Walk": {
+        "imagesCount": 4
     },
-    "Gluteus Kickback" :{
-        "imagesCount" : 2
+    "Gluteus Kickback": {
+        "imagesCount": 2
     },
-    "Kneeling Squat" :{
-        "imagesCount" : 2
+    "Kneeling Squat": {
+        "imagesCount": 2
     },
-    "Pulsing Squat" :{
-        "imagesCount" : 4
+    "Pulsing Squat": {
+        "imagesCount": 4
     },
-    "Side Lying Abduction" :{
-        "imagesCount" : 2
+    "Side Lying Abduction": {
+        "imagesCount": 2
     },
-    "Squat Hold Abduction" :{
-        "imagesCount" : 2
+    "Squat Hold Abduction": {
+        "imagesCount": 2
     },
-    "Bridge Walkout" :{
-        "imagesCount" : 3
+    "Bridge Walkout": {
+        "imagesCount": 3
     },
-    "Overhead Triceps Extension" :{
-        "imagesCount" : 2
+    "Overhead Triceps Extension": {
+        "imagesCount": 2
     },
-    "Triceps Kickback" :{
-        "imagesCount" : 2
+    "Triceps Kickback": {
+        "imagesCount": 2
     },
-    "Dips" :{
-        "imagesCount" : 2
+    "Dips": {
+        "imagesCount": 2
     },
-    "Bench Press" :{
-        "imagesCount" : 2
+    "Bench Press": {
+        "imagesCount": 2
     },
-    "Bench Press Alternating" :{
-        "imagesCount" : 4 
+    "Bench Press Alternating": {
+        "imagesCount": 4
     },
-    "Plank" :{
-        "imagesCount" : 1
+    "Plank": {
+        "imagesCount": 1
     },
-    "Bear Crawl" :{
-        "imagesCount" : 11
+    "Bear Crawl": {
+        "imagesCount": 11
     },
-    "Hammer Curls" :{
-        "imagesCount" : 2
+    "Hammer Curls": {
+        "imagesCount": 2
     },
-    "Pronated Curls" :{
-        "imagesCount" : 2
+    "Pronated Curls": {
+        "imagesCount": 2
     },
-    "Rear Delt Flies" :{
-        "imagesCount" : 2
+    "Rear Delt Flies": {
+        "imagesCount": 2
     },
-    "Supinated Biceps Curls" : {
-        "imagesCount" : 2
+    "Supinated Biceps Curls": {
+        "imagesCount": 2
     }
 }
